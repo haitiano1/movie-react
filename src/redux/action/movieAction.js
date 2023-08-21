@@ -61,7 +61,7 @@ export const layThongTinLichChieuHeThongRap = () => {
         try {
             const result = await axios({
                 method: 'GET',
-                url: `${URL_API}QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP01`,
+                url: `${URL_API}QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=GP07`,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER
                 }

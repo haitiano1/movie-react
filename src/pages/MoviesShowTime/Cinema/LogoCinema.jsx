@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { layThongTinHeThongRap, layThongTinLichChieuHeThongRap } from '../../../redux/action/movieAction'
-import { Tabs } from 'antd';
+import { Tabs, Button } from 'antd';
+import moment from 'moment/moment';
 
 export default function LogoCinema() {
 
@@ -14,24 +15,39 @@ export default function LogoCinema() {
         dispatch(action)
     }, [])
     return (
-        <div className=' mt-4 container'>
-            <h3 className='font-weight-bold text-center'>CÁC SUẤT CHIẾU</h3>
+        <div className=' mt-4 container mb-5'>
+            <h3 className='font-weight-bold text-center mb-3'>CÁC SUẤT CHIẾU</h3>
             <Tabs
-                style={{ height: 450 }}
+                style={{ height: 450}}
                 tabPosition={'left'}
                 items={listShowTimes.map((item, index) => {
                     return {
                         label: <img src={item.logo} className='' width={42} height={42} alt={item.maHeThongRap} />,
                         key: index,
                         children: <Tabs
-                            style={{ height: 450 }}
+                            style={{ height: 450}}
                             tabPosition={'left'}
                             items={item.lstCumRap.map((cumRapItem) => {
-                                console.log(cumRapItem.tenCumRap)
                                 return {
-                                    label: <p>{cumRapItem.tenCumRap}</p>,
-                                    key: cumRapItem.maCumRap,
-                                    children: "vc"
+                                    label: <h6 style={{ minWidth:350 }}>{cumRapItem.tenCumRap}</h6>,
+                                    key: cumRapItem.maCumRap === 'glx-nguyen-du\r\n' ? 'glx-nguyen-du' : cumRapItem.maCumRap,
+                                    children: <div>
+                                        {cumRapItem.danhSachPhim.slice(0, 3).map((item, index) => {
+                                            return (<div className='d-flex my-4 ml-2' key={index}>
+                                                <img src={item.hinhAnh} alt="" width={80} height='auto' />
+                                                <div className='ml-2'>
+                                                    <h5>{item.tenPhim}</h5>
+                                                    <div>{item.lstLichChieuTheoPhim.slice(0, 4).map((item, index) =>
+                                                        <Button
+                                                            key={item.maLichChieu} className='mr-2 mt-2'>
+                                                            {moment(item.ngayChieuGioChieu).format('hh:mm A')}
+                                                        </Button>
+                                                    )}</div>
+                                                </div>
+                                            </div>)
+                                        })}
+
+                                    </div>
                                 }
                             })}
                         />
