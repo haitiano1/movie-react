@@ -73,10 +73,10 @@ export default function DetailMovies(props) {
             key: '2',
             label: <h5><b>THÔNG TIN</b></h5>,
             children: <div>
-                <div className='py-5'>
+                <div className='py-3'>
                         <div className="d-flex mb-2">
                             <h6 className='font-bold col-sm-4' >Ngày công chiếu</h6>
-                            <p>{moment(detailMovies.ngayKhoiChieu).format('L')}</p>
+                            <p>{moment(detailMovies.ngayKhoiChieu).format('DD/MM/YYYY')}</p>
                         </div>
                         <div className="d-flex mb-2">
                             <h6 className='font-bold col-sm-4' >Tình trạng</h6>
