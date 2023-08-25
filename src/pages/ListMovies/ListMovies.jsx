@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Card, Button } from 'antd';
 import { layDanhSachPhimPhanTrang } from '../../redux/action/movieAction.js';
 import Pagination from '../Pagination/Pagination.jsx';
+import { history } from '../../App.js';
 export default function ListMovies() {
     const { Meta } = Card;
     let { listMoviesPagination } = useSelector(state => state.movieReducer)
@@ -23,9 +24,13 @@ export default function ListMovies() {
                             style={{ width: 240 }}
                             cover={<img alt="example" src={item.hinhAnh} style={{ objectFit: 'cover', height: 400 }} />}
                         >
-                            <Meta title={item.tenPhim} description={item.moTa.length > 45 ? `${item.moTa.slice(0, 45)}...` : item.moTa} />
+                            <Meta onClick={() => {
+                                history.push(`/detail/${item.maPhim}`);
+                            }} title={item.tenPhim} description={item.moTa.length > 45 ? `${item.moTa.slice(0, 45)}...` : item.moTa} />
                             <div className='absolute bottom-3 w-full left-0 px-4'>
-                                <Button className='mt-3 font-weight-bold' type="primary" danger>ĐẶT VÉ</Button>
+                                <Button onClick={() => {
+                                    history.push(`/detail/${item.maPhim}`);
+                                }} className='mt-3 font-weight-bold' type="primary" danger>ĐẶT VÉ</Button>
                             </div>
                         </Card>
                     </Col>

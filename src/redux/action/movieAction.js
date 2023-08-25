@@ -1,9 +1,85 @@
 import axios from "axios";
 import { TOKEN_CYBER, URL_API } from "../../ulti/setting";
-import { getMovies, paginationMovies, getCinemas, getShowTimes } from "../reducers/movieReducer";
+import { getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies } from "../reducers/movieReducer";
+import Swal from 'sweetalert2'
+import { history } from "../../App";
+
+export const dangKyAction = (infoUser) => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                method: 'POST',
+                url: `${URL_API}QuanLyNguoiDung/DangKy`,
+                data: infoUser,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER
+                }
+            });
+            // console.log('thanh cong', result.data.content)
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: 'Đăng kí thành công. Vui lòng đăng nhập!'
+            })
+            history.push('/login')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const dangNhapAction = (infoUser) => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                method: 'POST',
+                url: `${URL_API}QuanLyNguoiDung/DangNhap`,
+                data: infoUser,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER
+                }
+            });
+            const action = login(result.data.content)
+            dispatch(action)
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 4000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+            Toast.fire({
+                icon: 'success',
+                title: 'Đăng nhập thành công'
+            })
+            history.push('/')
+        } catch (error) {
+            // console.log(error.response.data.content)
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tài khoản hoặc mật khẩu không đúng!',
+            })
+        }
+    }
+}
 
 export const layDanhSachPhim = () => {
-    // render Mang = mang.map().slice(soTrang = (soTrang - 1) * 8, tongPhanTuMuonLay (soTrang - 1 ) * 8 + 8)
     return async (dispatch) => {
         try {
             const result = await axios({
@@ -25,7 +101,7 @@ export const layDanhSachPhimPhanTrang = (soTrang = 2, soPhanTuTrenTrang = 8) => 
         try {
             const result = await axios({
                 method: 'GET',
-                url: `${URL_API}QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
+                url: `${URL_API}QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP09&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER
                 }
@@ -50,7 +126,6 @@ export const layThongTinHeThongRap = () => {
             });
             const action = getCinemas(result.data.content)
             dispatch(action)
-
         } catch (error) {
             console.log(error)
         }
@@ -67,6 +142,26 @@ export const layThongTinLichChieuHeThongRap = () => {
                 }
             });
             const action = getShowTimes(result.data.content)
+            dispatch(action)
+            // console.log(result.data.content)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const LayThongTinChiTietPhim = (id) => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                method: 'GET',
+                url: `${URL_API}QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER
+                }
+            });
+            const action = getDetailMovies(result.data.content)
             dispatch(action)
             console.log(result.data.content)
 

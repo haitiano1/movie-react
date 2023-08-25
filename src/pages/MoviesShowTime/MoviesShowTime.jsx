@@ -3,7 +3,7 @@ import LogoCinema from './Cinema/LogoCinema'
 
 export default function MoviesShowTime() {
   return (
-    <div>MoviesShowTime
+    <div>
     <LogoCinema/>
     </div>
   )

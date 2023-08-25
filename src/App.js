@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { createBrowserHistory } from "history";
 import Header from './components/Header/Header';
 import Carousels from './pages/Carousels/Carousels';
 import ListMovies from './pages/ListMovies/ListMovies';
@@ -7,17 +8,31 @@ import Loading from './components/Loading/Loading';
 import MoviesShowTime from './pages/MoviesShowTime/MoviesShowTime';
 import LogoCinema from './pages/MoviesShowTime/Cinema/LogoCinema';
 import Footer from './components/Footer/Footer';
-import { Router, Switch, BrowserRouter } from 'react-router-dom';
+import { Router, Route, Switch, BrowserRouter } from 'react-router-dom';
 import CustomTemplate from './Templates/CustomTemplate';
+import HomeTemplate from './Templates/HomeTemplate';
+import DetailMovies from './pages/ListMovies/DetailMovies';
+import Page404 from './components/Page404/Page404';
+import Register from './pages/Auth/Register';
+import Login from './pages/Auth/Login';
+
+export const history = createBrowserHistory();
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router history={history}>
       <Switch>
-        <CustomTemplate path="/home"/>
-        <CustomTemplate path="/"/>
+        <HomeTemplate path="/detail/:id" component={DetailMovies} />
+        <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
+
+
+        <CustomTemplate path="/home" />
+        <CustomTemplate path="/" />
+
+        {/* <Route path="*" component={<Page404/>} /> */}
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 }
 

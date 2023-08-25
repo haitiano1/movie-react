@@ -1,0 +1,69 @@
+.glass-container {
+    position: relative;
+    min-height: 450px;
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+}
+
+.glass {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    z-index: 1;
+}
+
+.content {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+}
+.c100 {
+  border-radius: 50%;
+  float: left;
+  height: 1em;
+  margin: 0 0.1em 0.1em 0;
+  position: relative;
+  width: 1em
+}
+
+.tagDetailHot {
+    display: inline-block;
+    background-color: #ff5733;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  
+  .tagDetailDangChieu {
+    display: inline-block;
+    background-color: green;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  
+  .tagDetailSapChieu {
+    display: inline-block;
+    background-color: rgb(6, 128, 198);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+@media screen and (max-width:780px) {
+    .glass-container {
+        min-height:550px;
+      
+    }
+}
