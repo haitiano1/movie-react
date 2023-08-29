@@ -19,18 +19,16 @@ export default function ListMovies() {
             <Row gutter={[16, 16]}>
                 {listMoviesPagination?.items?.map((item) => (
                     <Col key={item.maPhim} xs={24} sm={12} md={8} lg={6} xl={6}>
-                        <Card
+                        <Card onClick={() => {
+                                history.push(`/detail/${item.maPhim}`);
+                            }}
                             hoverable
                             style={{ width: 240 }}
                             cover={<img alt="example" src={item.hinhAnh} style={{ objectFit: 'cover', height: 400 }} />}
                         >
-                            <Meta onClick={() => {
-                                history.push(`/detail/${item.maPhim}`);
-                            }} title={item.tenPhim} description={item.moTa.length > 45 ? `${item.moTa.slice(0, 45)}...` : item.moTa} />
+                            <Meta title={item.tenPhim} description={item.moTa.length > 45 ? `${item.moTa.slice(0, 45)}...` : item.moTa} />
                             <div className='absolute bottom-3 w-full left-0 px-4'>
-                                <Button onClick={() => {
-                                    history.push(`/detail/${item.maPhim}`);
-                                }} className='mt-3 font-weight-bold' type="primary" danger>ĐẶT VÉ</Button>
+                                <Button className='mt-3 font-weight-bold' type="primary" danger>ĐẶT VÉ</Button>
                             </div>
                         </Card>
                     </Col>

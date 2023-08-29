@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TOKEN_CYBER, URL_API } from "../../ulti/setting";
+import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
 import { getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
@@ -15,7 +15,6 @@ export const dangKyAction = (infoUser) => {
                     'TokenCybersoft': TOKEN_CYBER
                 }
             });
-            // console.log('thanh cong', result.data.content)
             const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -49,6 +48,10 @@ export const dangNhapAction = (infoUser) => {
                     'TokenCybersoft': TOKEN_CYBER
                 }
             });
+            localStorage.setItem(ACCESS_TOKEN,result.data.content.accessToken)
+
+            localStorage.setItem(userMovie, JSON.stringify(result.data.content))
+
             const action = login(result.data.content)
             dispatch(action)
 
@@ -101,7 +104,7 @@ export const layDanhSachPhimPhanTrang = (soTrang = 2, soPhanTuTrenTrang = 8) => 
         try {
             const result = await axios({
                 method: 'GET',
-                url: `${URL_API}QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP09&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
+                url: `${URL_API}QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP03&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER
                 }

@@ -1,5 +1,12 @@
 // rxs
 import { createSlice } from '@reduxjs/toolkit'
+import { userMovie } from '../../ulti/setting';
+
+let userName = null;
+if (localStorage.getItem(userMovie)) {
+  userName = JSON.parse(localStorage.getItem(userMovie))
+}
+
 
 const initialState = {
   listMovies: [],
@@ -8,7 +15,7 @@ const initialState = {
   listShowTimes: [],
   isLoading: false,
   detailMovies:{},
-  userLogin:null
+  userLogin: userName
 }
 
 const movieReducer = createSlice({
@@ -16,6 +23,9 @@ const movieReducer = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
+      state.userLogin = action.payload
+    },
+    logout: (state, action) => {
       state.userLogin = action.payload
     },
     getMovies: (state, action) => {
@@ -36,7 +46,7 @@ const movieReducer = createSlice({
   }
 });
 
-export const { getMovies, paginationMovies, getCinemas, getShowTimes,getDetailMovies,login } = movieReducer.actions
+export const { getMovies,logout, paginationMovies, getCinemas, getShowTimes,getDetailMovies,login } = movieReducer.actions
 
 export default movieReducer.reducer
 
