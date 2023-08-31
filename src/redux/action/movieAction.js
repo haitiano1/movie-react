@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies } from "../reducers/movieReducer";
+import { getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies,getListTicket, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
 
@@ -48,7 +48,7 @@ export const dangNhapAction = (infoUser) => {
                     'TokenCybersoft': TOKEN_CYBER
                 }
             });
-            localStorage.setItem(ACCESS_TOKEN,result.data.content.accessToken)
+            localStorage.setItem(ACCESS_TOKEN, result.data.content.accessToken)
 
             localStorage.setItem(userMovie, JSON.stringify(result.data.content))
 
@@ -101,6 +101,7 @@ export const layDanhSachPhim = () => {
 
 export const layDanhSachPhimPhanTrang = (soTrang = 2, soPhanTuTrenTrang = 8) => {
     return async (dispatch) => {
+        dispatch(loadingReducer(true));
         try {
             const result = await axios({
                 method: 'GET',
@@ -109,6 +110,8 @@ export const layDanhSachPhimPhanTrang = (soTrang = 2, soPhanTuTrenTrang = 8) => 
                     'TokenCybersoft': TOKEN_CYBER
                 }
             });
+            dispatch(loadingReducer(false));
+
             const action = paginationMovies(result.data.content)
             dispatch(action)
 
@@ -117,8 +120,10 @@ export const layDanhSachPhimPhanTrang = (soTrang = 2, soPhanTuTrenTrang = 8) => 
         }
     }
 }
+
 export const layThongTinHeThongRap = () => {
     return async (dispatch) => {
+        dispatch(loadingReducer(true));
         try {
             const result = await axios({
                 method: 'GET',
@@ -127,6 +132,7 @@ export const layThongTinHeThongRap = () => {
                     'TokenCybersoft': TOKEN_CYBER
                 }
             });
+            dispatch(loadingReducer(false));
             const action = getCinemas(result.data.content)
             dispatch(action)
         } catch (error) {
@@ -134,8 +140,10 @@ export const layThongTinHeThongRap = () => {
         }
     }
 }
+
 export const layThongTinLichChieuHeThongRap = () => {
     return async (dispatch) => {
+        dispatch(loadingReducer(true));
         try {
             const result = await axios({
                 method: 'GET',
@@ -144,6 +152,7 @@ export const layThongTinLichChieuHeThongRap = () => {
                     'TokenCybersoft': TOKEN_CYBER
                 }
             });
+            dispatch(loadingReducer(false));
             const action = getShowTimes(result.data.content)
             dispatch(action)
             // console.log(result.data.content)
@@ -154,8 +163,9 @@ export const layThongTinLichChieuHeThongRap = () => {
     }
 }
 
-export const LayThongTinChiTietPhim = (id) => {
+export const layThongTinChiTietPhim = (id) => {
     return async (dispatch) => {
+        dispatch(loadingReducer(true));
         try {
             const result = await axios({
                 method: 'GET',
@@ -164,7 +174,28 @@ export const LayThongTinChiTietPhim = (id) => {
                     'TokenCybersoft': TOKEN_CYBER
                 }
             });
+            dispatch(loadingReducer(false));
             const action = getDetailMovies(result.data.content)
+            dispatch(action)
+            console.log(result.data.content)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const layDanhSachPhongVe = (id) => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                method: 'GET',
+                url: `${URL_API}QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${id}`,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER
+                }
+            });
+            const action = getListTicket(result.data.content)
             dispatch(action)
             console.log(result.data.content)
 

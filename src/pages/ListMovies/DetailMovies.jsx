@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { LayThongTinChiTietPhim } from '../../redux/action/movieAction'
-import { Layout,Button, Rate, Tabs } from 'antd'
+import { layThongTinChiTietPhim } from '../../redux/action/movieAction'
+import { Layout, Button, Rate, Tabs } from 'antd'
 import style from "./detail.module.css";
 import moment from 'moment';
 import '../../assets/circle/circle.css'
+import { history } from '../../App';
 
 export default function DetailMovies(props) {
     let { detailMovies } = useSelector(state => state.movieReducer)
     let dispatch = useDispatch()
     useEffect(() => {
         let { id } = props.match.params
-        const action = LayThongTinChiTietPhim(id)
+        const action = layThongTinChiTietPhim(id)
         dispatch(action)
     }, [])
     useEffect(() => {
@@ -21,13 +22,13 @@ export default function DetailMovies(props) {
     // console.log(detailMovies)
     useEffect(() => {
         const handleResize = () => {
-          setIsLargeScreen(window.innerWidth >= 992);
+            setIsLargeScreen(window.innerWidth >= 992);
         };
         window.addEventListener('resize', handleResize);
         return () => {
-          window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
-      }, []);
+    }, []);
     const items = [
         {
             key: '1',
@@ -50,13 +51,15 @@ export default function DetailMovies(props) {
                                             <div className='ml-2'>
                                                 <h6>{rap.tenCumRap}</h6>
                                                 <p>{rap.diaChi}</p>
-                                                <Button className='font-weight-bold' type="primary" danger size='small'>
-                                                    {rap.lichChieuPhim.map((lichChieu) => {
-                                                        return <>
-                                                            {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
-                                                        </>
-                                                    })}
-                                                </Button>
+                                                {rap.lichChieuPhim.map((lichChieu) => {
+                                                    return <>
+                                                        <Button onClick={()=>{
+                                                            history.push(`/checkout/${lichChieu.maLichChieu}`)
+                                                        }} className='font-weight-bold mr-2' type="primary" danger size='small'>
+                                                            {lichChieu.tenRap} - {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
+                                                        </Button>
+                                                    </>
+                                                })}
                                             </div>
                                         </div>
                                     })
@@ -74,35 +77,35 @@ export default function DetailMovies(props) {
             label: <h5><b>THÔNG TIN</b></h5>,
             children: <div>
                 <div className='py-3'>
-                        <div className="d-flex mb-2">
-                            <h6 className='font-bold col-sm-4' >Ngày công chiếu</h6>
-                            <p>{moment(detailMovies.ngayKhoiChieu).format('DD/MM/YYYY')}</p>
-                        </div>
-                        <div className="d-flex mb-2">
-                            <h6 className='font-bold col-sm-4' >Tình trạng</h6>
-                            <p>{detailMovies.sapChieu ? <span className={style.tagDetailSapChieu}>Sắp chiếu</span> : <span className={style.tagDetailDangChieu}>Đang chiếu</span>}</p>
-                        </div>
-                        <div className="d-flex mb-2">
-                            <h6 className='font-bold col-sm-4' >Đạo diễn</h6>
-                            <p>John Davis</p>
-                        </div>
-                        <div className="d-flex mb-2">
-                            <h6 className='font-bold col-sm-4' >Diễn viên</h6>
-                            <p>Kyle Chandler, Rebecca Hall, Eiza González, Millie Bobby Brown</p>
-                        </div>
-                        <div className="d-flex mb-2">
-                            <h6 className='font-bold col-sm-4' >Thể loại</h6>
-                            <p>Hành Động, Giả Tưởng</p>
-                        </div>
-                        <div className="d-flex mb-2">
-                            <h6 className='font-bold col-sm-4' >Quốc gia</h6>
-                            <p>Mỹ</p>
-                        </div>
+                    <div className="d-flex mb-2">
+                        <h6 className='font-bold col-sm-4' >Ngày công chiếu</h6>
+                        <p>{moment(detailMovies.ngayKhoiChieu).format('DD/MM/YYYY')}</p>
+                    </div>
+                    <div className="d-flex mb-2">
+                        <h6 className='font-bold col-sm-4' >Tình trạng</h6>
+                        <p>{detailMovies.sapChieu ? <span className={style.tagDetailSapChieu}>Sắp chiếu</span> : <span className={style.tagDetailDangChieu}>Đang chiếu</span>}</p>
+                    </div>
+                    <div className="d-flex mb-2">
+                        <h6 className='font-bold col-sm-4' >Đạo diễn</h6>
+                        <p>John Davis</p>
+                    </div>
+                    <div className="d-flex mb-2">
+                        <h6 className='font-bold col-sm-4' >Diễn viên</h6>
+                        <p>Kyle Chandler, Rebecca Hall, Eiza González, Millie Bobby Brown</p>
+                    </div>
+                    <div className="d-flex mb-2">
+                        <h6 className='font-bold col-sm-4' >Thể loại</h6>
+                        <p>Hành Động, Giả Tưởng</p>
+                    </div>
+                    <div className="d-flex mb-2">
+                        <h6 className='font-bold col-sm-4' >Quốc gia</h6>
+                        <p>Mỹ</p>
+                    </div>
                     <div>
                         <h6 className='font-weight-bold mb-2'> Nội dung </h6>
                         <p>{detailMovies.moTa}</p>
                     </div>
-                    </div>
+                </div>
             </div>
         }
     ]
@@ -144,11 +147,11 @@ export default function DetailMovies(props) {
                                 </div>
 
                                 <p
-        className={`${isLargeScreen ? 'd-block' : 'd-none'}`}
-        style={{ fontSize: 14, marginTop: 15, fontWeight: 'normal' }}
-      >
-        {detailMovies.moTa}
-      </p>
+                                    className={`${isLargeScreen ? 'd-block' : 'd-none'}`}
+                                    style={{ fontSize: 14, marginTop: 15, fontWeight: 'normal' }}
+                                >
+                                    {detailMovies.moTa}
+                                </p>
                                 <br />
                             </div>
                         </div>

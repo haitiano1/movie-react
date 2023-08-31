@@ -5,7 +5,6 @@ import Header from './components/Header/Header';
 import Carousels from './pages/Carousels/Carousels';
 import ListMovies from './pages/ListMovies/ListMovies';
 import Loading from './components/Loading/Loading';
-import MoviesShowTime from './pages/MoviesShowTime/MoviesShowTime';
 import LogoCinema from './pages/MoviesShowTime/Cinema/LogoCinema';
 import Footer from './components/Footer/Footer';
 import { Router, Route, Switch, BrowserRouter } from 'react-router-dom';
@@ -15,16 +14,20 @@ import DetailMovies from './pages/ListMovies/DetailMovies';
 import Page404 from './components/Page404/Page404';
 import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
+import Checkout from './pages/Checkout/Checkout';
 
 export const history = createBrowserHistory();
 
 function App() {
   return (
     <Router history={history}>
+    <Loading/>
       <Switch>
         <HomeTemplate path="/detail/:id" component={DetailMovies} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
+        <Route path="/checkout/:id" component={Checkout} />
+
 
 
         <CustomTemplate path="/home" />

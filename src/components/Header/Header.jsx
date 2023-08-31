@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import { ACCESS_TOKEN, TOKEN_CYBER, userMovie } from '../../ulti/setting';
+import { ACCESS_TOKEN, userMovie } from '../../ulti/setting';
 import { history } from '../../App';
 
 export default function Header() {
@@ -42,7 +42,7 @@ export default function Header() {
                                 showCancelButton: true,
                                 confirmButtonColor: '#3085d6',
                                 cancelButtonColor: '#d33',
-                                confirmButtonText: 'Đăng Xuất'
+                                confirmButtonText: 'Đăng xuất'
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     localStorage.removeItem(userMovie)
