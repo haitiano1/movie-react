@@ -39,7 +39,7 @@ export default function DetailMovies(props) {
                         <Tabs
                             tabPosition={'left'}
                             items={detailMovies.heThongRapChieu.map((item) => {
-                                return {
+                                return {  
                                     label: <div className='d-flex align-items-center'>
                                         <img src={item.logo} className='mr-2' width={40} height={42} alt={item.maHeThongRap} />
                                         <h6>{item.maHeThongRap}</h6>
@@ -52,13 +52,14 @@ export default function DetailMovies(props) {
                                                 <h6>{rap.tenCumRap}</h6>
                                                 <p>{rap.diaChi}</p>
                                                 {rap.lichChieuPhim.map((lichChieu) => {
-                                                    return <>
-                                                        <Button onClick={()=>{
+                                                    return <span key={lichChieu.maLichChieu}> 
+                                                        <Button  onClick={() => {
+                                                            localStorage.setItem("DetailFlim",JSON.stringify(detailMovies));
                                                             history.push(`/checkout/${lichChieu.maLichChieu}`)
                                                         }} className='font-weight-bold mr-2' type="primary" danger size='small'>
                                                             {lichChieu.tenRap} - {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
                                                         </Button>
-                                                    </>
+                                                    </span>
                                                 })}
                                             </div>
                                         </div>

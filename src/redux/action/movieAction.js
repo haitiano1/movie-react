@@ -187,6 +187,7 @@ export const layThongTinChiTietPhim = (id) => {
 
 export const layDanhSachPhongVe = (id) => {
     return async (dispatch) => {
+        dispatch(loadingReducer(true));
         try {
             const result = await axios({
                 method: 'GET',
@@ -195,6 +196,7 @@ export const layDanhSachPhongVe = (id) => {
                     'TokenCybersoft': TOKEN_CYBER
                 }
             });
+            dispatch(loadingReducer(false));
             const action = getListTicket(result.data.content)
             dispatch(action)
             console.log(result.data.content)

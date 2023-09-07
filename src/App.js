@@ -15,6 +15,7 @@ import Page404 from './components/Page404/Page404';
 import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
 import Checkout from './pages/Checkout/Checkout';
+import MenuCheckout from './pages/Checkout/MenuCheckout';
 
 export const history = createBrowserHistory();
 
@@ -26,7 +27,7 @@ function App() {
         <HomeTemplate path="/detail/:id" component={DetailMovies} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        <Route path="/checkout/:id" component={Checkout} />
+        <Route path="/checkout/:id" component={MenuCheckout} />
 
 
 
