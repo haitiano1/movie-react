@@ -22,37 +22,40 @@ export default function Checkout() {
 
 const renderSeats = () =>{
     return listTicket.danhSachGhe?.map((item, index)=>{
-      return <Fragment key={index}>
-        <button className='normalSeat'></button>
 
+      let vipSeat = item.loaiGhe == 'Vip' ? 'vipSeat' : '';
+      let reservedSeat = item.daDat ? 'reservedSeat' : '';	
+
+      return <Fragment key={index}>
+        <button disabled={item.daDat} className={`normalSeat ${vipSeat} ${reservedSeat}`}></button>
       </Fragment>
     })
 }
 
   return (
     <div className='row'>
-      <div className="col-8">
+      <div className="col-12 col-lg-8">
         <div className={style.screen}></div>                                                  
         <div className={style.trapezoid}><b>MÀN HÌNH</b></div>
         <div className='text-center mt-3'>{renderSeats()}</div>
       </div>
-      <div className="col-4">
+      <div className="col-12 col-lg-4 billTicket">
         <div className="d-flex flex-column p-4 shadow-lg border border-warning" style={{borderRadius: '20px'}}>
-          <h4 className="font-weight-bold text-xl text-center mb-2">HÓA ĐƠN</h4>
+          <h4 className="font-weight-bold text-center mb-2">HÓA ĐƠN</h4>
           <div>
             <hr />
             <div className="mt-1 mb-2">
               <h6 className="font-weight-bold" style={{color:"#ea7246"}}>{listTicket.thongTinPhim?.tenPhim}</h6>
-              <p className="text-sm">{listTicket.thongTinPhim?.diaChi}</p>
-              <p className="text-sm">{listTicket.thongTinPhim?.tenCumRap}</p>
-              <p className="text-sm">
+              <p>{listTicket.thongTinPhim?.diaChi}</p>
+              <p>{listTicket.thongTinPhim?.tenCumRap}</p>
+              <p>
                {listTicket.thongTinPhim?.ngayChieu} - {listTicket.thongTinPhim?.gioChieu}
               </p>
               <p></p>
             </div>
             <hr />
             <div className="mt-1 mb-2">
-              <p className="text-sm text-muted">Ghế</p>
+              <p className="text-muted">Ghế</p>
               <div className="d-flex flex-wrap">
                 <span className="me-2 text-success font-weight-bold">Danh sach ghe</span>
               </div>
@@ -68,9 +71,9 @@ const renderSeats = () =>{
               <p>{userLogin.soDT}</p>
             </div>
             <hr />
-            <div className="mt-1 mb-2">
+            <div className="mt-1 mb-2 d-flex justify-content-between align-items-center">
               <p className="text-muted text-sm">Tổng tiền</p>
-              <p className="font-weight-bold"> 0 đ</p>
+              <p className="font-weight-bold text-success" style={{fontSize: "25px"}}> 7373đ</p>
             </div>
             <hr />
             <div style={{ fontSize: 12 }} className="mt-1 mb-3">
