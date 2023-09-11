@@ -14,9 +14,10 @@ const initialState = {
   listCinema: [],
   listShowTimes: [],
   isLoading: false,
-  detailMovies:{},
+  detailMovies: {},
   userLogin: userName,
-  listTicket:{}
+  listTicket: {},
+  postTickets: {}
 }
 
 const movieReducer = createSlice({
@@ -47,13 +48,16 @@ const movieReducer = createSlice({
     paginationMovies(state, action) {
       state.listMoviesPagination = action.payload
     },
+    bookTickets(state, action) {
+      state.postTickets = action.payload
+    },
     loadingReducer: (state, action) => {
       state.isLoading = action.payload
     },
   }
 });
 
-export const { getMovies,logout, paginationMovies, getCinemas, getShowTimes,getDetailMovies,login,getListTicket, loadingReducer} = movieReducer.actions
+export const { getMovies, logout, paginationMovies, getCinemas, getShowTimes, getDetailMovies, login, getListTicket, loadingReducer, bookTickets } = movieReducer.actions
 
 export default movieReducer.reducer
 

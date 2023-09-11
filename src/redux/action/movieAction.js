@@ -1,8 +1,10 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies,getListTicket, loadingReducer } from "../reducers/movieReducer";
+import { getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies,getListTicket,bookTickets, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
+
+const getAccessToken = localStorage.getItem(ACCESS_TOKEN)
 
 export const dangKyAction = (infoUser) => {
     return async (dispatch) => {
@@ -177,7 +179,6 @@ export const layThongTinChiTietPhim = (id) => {
             dispatch(loadingReducer(false));
             const action = getDetailMovies(result.data.content)
             dispatch(action)
-            console.log(result.data.content)
 
         } catch (error) {
             console.log(error)
@@ -198,6 +199,28 @@ export const layDanhSachPhongVe = (id) => {
             });
             dispatch(loadingReducer(false));
             const action = getListTicket(result.data.content)
+            console.log(result.data.content)
+            dispatch(action)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const datVe = (infoTicket) => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                method: 'POST',
+                url: `${URL_API}QuanLyDatVe/DatVe`,
+                data: infoTicket,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
+            });
+            const action = bookTickets(result.data.content)
             dispatch(action)
             console.log(result.data.content)
 

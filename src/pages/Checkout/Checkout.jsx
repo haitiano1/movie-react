@@ -5,11 +5,11 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Button } from 'antd';
 import style from './seats.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { layDanhSachPhongVe } from '../../redux/action/movieAction';
+import { datVe, layDanhSachPhongVe } from '../../redux/action/movieAction';
 
 export default function Checkout() {
 
-  let { listTicket, userLogin } = useSelector(state => state.movieReducer)
+  let { listTicket, userLogin, listChooseSeat} = useSelector(state => state.movieReducer)
   
   let dispatch = useDispatch()
 
@@ -23,11 +23,16 @@ export default function Checkout() {
 const renderSeats = () =>{
     return listTicket.danhSachGhe?.map((item, index)=>{
 
+      let myReservedSeat = userLogin.taiKhoan === item.taiKhoanNguoiDat ? 'myReservedSeat' : ''
       let vipSeat = item.loaiGhe == 'Vip' ? 'vipSeat' : '';
       let reservedSeat = item.daDat ? 'reservedSeat' : '';	
+      let currentChooseSeat = '';
+
 
       return <Fragment key={index}>
-        <button disabled={item.daDat} className={`normalSeat ${vipSeat} ${reservedSeat}`}></button>
+        <button onClick={()=>{
+          alert(item.loaiGhe)
+        }} disabled={item.daDat} className={`normalSeat ${vipSeat} ${reservedSeat} ${myReservedSeat} ${currentChooseSeat}`}></button>
       </Fragment>
     })
 }
@@ -57,7 +62,9 @@ const renderSeats = () =>{
             <div className="mt-1 mb-2">
               <p className="text-muted">Ghế</p>
               <div className="d-flex flex-wrap">
-                <span className="me-2 text-success font-weight-bold">Danh sach ghe</span>
+                <span className="me-2 text-success font-weight-bold">
+                  vcl
+                </span>
               </div>
             </div>
             <hr />
@@ -84,7 +91,9 @@ const renderSeats = () =>{
             </div>
           </div>
           <div className="mt-auto">
-            <div className="text-center p-3 font-weight-bold text-white" style={{backgroundColor: '#f17c43', borderRadius:'40px'}}
+            <div onClick={()=>{
+              dispatch(datVe(id))
+            }} className="text-center p-3 font-weight-bold text-white" style={{backgroundColor: '#f17c43', borderRadius:'40px'}}
             >THANH TOÁN
             </div>
           </div>

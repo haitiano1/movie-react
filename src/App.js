@@ -16,7 +16,6 @@ import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
 import Checkout from './pages/Checkout/Checkout';
 import MenuCheckout from './pages/Checkout/MenuCheckout';
-
 export const history = createBrowserHistory();
 
 function App() {
@@ -28,8 +27,7 @@ function App() {
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/checkout/:id" component={MenuCheckout} />
-
-
+    
 
         <CustomTemplate path="/home" />
         <CustomTemplate path="/" />

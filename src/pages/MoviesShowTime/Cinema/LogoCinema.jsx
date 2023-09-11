@@ -46,7 +46,8 @@ export default function LogoCinema() {
                                                         </Button>
                                                     )}</div>
                                                 </div>
-                                            </div>)
+                                            </div>
+                                            )
                                         })}
 
                                     </div>
