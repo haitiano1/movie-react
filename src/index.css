@@ -143,13 +143,6 @@ code {
     height: 19px;
   }
 }
-@media screen and (max-width: 1284px) {
-  svg{
-    width: 100%;
-    height: 100%;
-    display: flex;
-  }
-}
 
 @media screen and (max-width:465px) {
   .normalSeat {

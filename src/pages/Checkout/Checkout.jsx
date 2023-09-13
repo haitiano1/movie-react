@@ -40,7 +40,8 @@ export default function Checkout() {
   }, [])
 
   const renderSeats = () => {
-    console.log("arrChooseSeat:", arrChooseSeat);
+    arrChooseSeat.sort((a, b) => a.tenGhe - b.tenGhe);
+    // console.log("arrChooseSeat:", arrChooseSeat);
     return listTicket.danhSachGhe?.map((item, index) => {
 
       let myReservedSeat = userLogin.taiKhoan === item.taiKhoanNguoiDat ? 'myReservedSeat' : ''
@@ -116,7 +117,6 @@ export default function Checkout() {
 
   }
 
-
   return (
     <div className='row'>
       <div className="col-12 col-lg-8">
@@ -124,7 +124,7 @@ export default function Checkout() {
         <div className={style.trapezoid}><b>MÀN HÌNH</b></div>
         <div className='text-center mt-3'>
         <div className="mx-auto w-full">{renderSeats()}</div>
-          <div class="row row-cols-2 row-cols-sm-3 row-cols-lg-5 g-2 mt-5">
+          <div className="row row-cols-2 row-cols-sm-3 row-cols-lg-5 g-2 mt-5">
             <div className="text-center text-sm text-gray-500">
               <button className="normalSeat"></button>
               <p>Ghế thường</p>

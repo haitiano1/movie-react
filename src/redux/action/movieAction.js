@@ -199,7 +199,7 @@ export const layDanhSachPhongVe = (id) => {
             });
             dispatch(loadingReducer(false));
             const action = getListTicket(result.data.content)
-            console.log(result.data.content)
+            // console.log(result.data.content)
             dispatch(action)
 
         } catch (error) {
