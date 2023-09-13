@@ -19,7 +19,6 @@ export default function Carousels() {
       }
     })
     promise.then((result) => {
-      // console.log(result.data.content)
       setBanner(result.data.content)
     })
     promise.catch((err) => {
@@ -35,7 +34,7 @@ export default function Carousels() {
 
   return (
     <div>
-      <Carousel autoplay>
+      <Carousel >
         {renderBanner()}
       </Carousel>
     </div>
