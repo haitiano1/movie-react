@@ -81,7 +81,7 @@ export default function Checkout() {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="w-100 h-100 mx-auto text-white d-flex justify-content-center align-items-center"
+                  className=" X-icon-button w-100 h-100 mx-auto text-white d-flex justify-content-center align-items-center"
                 >
                   <path
                     fillRule="evenodd"
@@ -168,7 +168,7 @@ export default function Checkout() {
               </button>
               <p>Ghế đã được mua</p>
             </div>
-            <div className="text-center text-sm text-gray-500">
+            <div className="X-icon-button text-center text-sm text-gray-500">
               <button className="normalSeat myReservedSeat">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

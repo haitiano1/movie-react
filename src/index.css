@@ -116,3 +116,44 @@ code {
       margin-top: 50px;
   }
 }
+@media screen and (max-width:750px) {
+  .normalSeat {
+    width: 29px;
+    height: 24px;
+    font-size: 12px;
+    margin: 2px;
+  }
+
+  .X-icon-button {
+    width: 26px;
+    height: 21px;
+  }
+}
+
+@media screen and (max-width:560px) {
+  .normalSeat {
+    width: 25px;
+    height: 25px;
+    font-size: 10px;
+    margin: 1px;
+  }
+
+  .X-icon-button {
+    width: 22px;
+    height: 19px;
+  }
+}
+
+@media screen and (max-width:465px) {
+  .normalSeat {
+    width: 30px;
+    height: 30px;
+    font-size: 8px;
+    margin: 1px;
+  }
+
+  .X-icon-button {
+    width: 19px;
+    height: 16px;
+  }
+}
