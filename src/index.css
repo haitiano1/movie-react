@@ -146,6 +146,9 @@ code {
     height: 19px;
   }
 }
+button:focus:not(:focus-visible){
+  outline: none;
+}
 
 @media screen and (max-width:465px) {
   .normalSeat {
