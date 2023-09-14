@@ -21,6 +21,12 @@ export default function Checkout() {
     dispatch(action);
   }, []);
 
+  useEffect(() => {
+    if (arrChooseSeat.length > 0) {
+      setArrChooseSeat([]);
+    }
+  }, [listTicket]);
+
   let total = arrChooseSeat.reduce((total, item) => {
     return total + item.giaVe;
   }, 0).toLocaleString();
@@ -28,18 +34,19 @@ export default function Checkout() {
   const chooseSeat = useCallback((item) => {
     setArrChooseSeat((preState) => {
       let obj = preState.find((item2) => {
-        return item.tenGhe === item2.tenGhe;
+        return item.maGhe === item2.maGhe;
       })
       // console.log(item.tenGhe)
       if (obj) {
-        return preState.filter((item2) => item2.tenGhe !== item.tenGhe);
+        return preState.filter((item2) => item2.maGhe !== item.maGhe);
       } else {
-        return [...preState, { tenGhe: item.tenGhe, giaVe: item.giaVe }];
+        return [...preState, { maGhe: item.maGhe, giaVe: item.giaVe, tenGhe: item.tenGhe }];
       }
     })
   }, [])
 
   const renderSeats = () => {
+  console.log(listTicket)
     arrChooseSeat.sort((a, b) => a.tenGhe - b.tenGhe);
     // console.log("arrChooseSeat:", arrChooseSeat);
     return listTicket.danhSachGhe?.map((item, index) => {
@@ -49,7 +56,7 @@ export default function Checkout() {
       let reservedSeat = item.daDat ? 'reservedSeat' : '';
       let currentChooseSeat = '';
       for (let value of arrChooseSeat) {
-        if (value.tenGhe === item.tenGhe) {
+        if (value.maGhe === item.maGhe) {
           currentChooseSeat = 'currentChooseSeat'
         }
       }
@@ -69,7 +76,7 @@ export default function Checkout() {
                   strokeWidth={1.5}
                   stroke="currentColor"
                   style={{ maxWidth: 26 }}
-                  className="w-100 h-100 mx-auto text-white d-flex justify-content-center align-items-center"
+                  className="w-100 h-100 mx-auto text-white vc d-flex justify-content-center align-items-center"
                 >
                   <path
                     strokeLinecap="round"
@@ -101,7 +108,7 @@ export default function Checkout() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-100 h-100 mx-auto text-white d-flex justify-content-center align-items-center"
+                className="w-100 h-100 mx-auto vlc text-white d-flex justify-content-center align-items-center"
               >
                 <path
                   strokeLinecap="round"
@@ -123,7 +130,7 @@ export default function Checkout() {
         <div className={style.screen}></div>
         <div className={style.trapezoid}><b>MÀN HÌNH</b></div>
         <div className='text-center mt-3'>
-        <div className="mx-auto w-full">{renderSeats()}</div>
+          <div className="mx-auto w-full">{renderSeats()}</div>
           <div className="row row-cols-2 row-cols-sm-3 row-cols-lg-5 g-2 mt-5">
             <div className="text-center text-sm text-gray-500">
               <button className="normalSeat"></button>
@@ -158,6 +165,7 @@ export default function Checkout() {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
+                  className="X-icon-button"
                 >
                   <path
                     fillRule="evenodd"
@@ -177,7 +185,7 @@ export default function Checkout() {
                   strokeWidth={1.5}
                   stroke="currentColor"
                   style={{ maxWidth: 26 }}
-                  className="  mx-auto"
+                  className="mx-auto"
                 >
                   <path
                     strokeLinecap="round"
@@ -190,7 +198,7 @@ export default function Checkout() {
             </div>
 
             <div className="text-center text-sm text-gray-500">
-              <button className="normalSeat otherReservedSeat2">
+              <button className="normalSeat otherReservedSeat">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -258,11 +266,15 @@ export default function Checkout() {
             </div>
           </div>
           <div className="mt-auto">
-            <div onClick={() => {
-              dispatch(datVe(id))
-            }} className="text-center p-3 font-weight-bold text-white" style={{ backgroundColor: '#f17c43', borderRadius: '40px' }}
+            <button disabled={arrChooseSeat.length === 0 ? true : false}
+              onClick={() => {
+                
+                let maLichChieu = id;
+                let danhSachVe = arrChooseSeat
+                dispatch(datVe({ maLichChieu, danhSachVe }))
+              }} className="text-center p-3 font-weight-bold text-white w-100 cursor-pointer border-0" style={{ backgroundColor: '#f17c43', borderRadius: '40px' }}
             >THANH TOÁN
-            </div>
+            </button>
           </div>
         </div>
       </div>

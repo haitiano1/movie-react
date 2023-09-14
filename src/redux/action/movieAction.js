@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies,getListTicket,bookTickets, loadingReducer } from "../reducers/movieReducer";
+import { getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
 
@@ -210,22 +210,53 @@ export const layDanhSachPhongVe = (id) => {
 
 export const datVe = (infoTicket) => {
     return async (dispatch) => {
+        dispatch(loadingReducer(true));
         try {
-            const result = await axios({
-                method: 'POST',
-                url: `${URL_API}QuanLyDatVe/DatVe`,
-                data: infoTicket,
-                headers: {
-                    'TokenCybersoft': TOKEN_CYBER,
-                    'Authorization': "Bearer " + getAccessToken
-                }
+            // Hiển thị hộp thoại xác nhận
+            const confirmResult = await Swal.fire({
+                text: "Bạn chắc chắn muốn đặt vé ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đặt vé'
             });
-            const action = bookTickets(result.data.content)
-            dispatch(action)
-            console.log(result.data.content)
 
+            if (confirmResult.isConfirmed) {
+                // Nếu người dùng đã xác nhận, thực hiện đặt vé
+                const result = await axios({
+                    method: 'POST',
+                    url: `${URL_API}QuanLyDatVe/DatVe`,
+                    data: infoTicket,
+                    headers: {
+                        'TokenCybersoft': TOKEN_CYBER,
+                        'Authorization': "Bearer " + getAccessToken
+                    }
+                });
+
+                // Cập nhật trạng thái ứng dụng sau khi đặt vé thành công
+                const action = bookTickets(result.data.content)
+                dispatch(action)
+                dispatch(layDanhSachPhongVe(infoTicket.maLichChieu))
+
+                Swal.fire(
+                    'Đặt vé thành công!',
+                    '',
+                    'success'
+                );
+            } else {
+                // Người dùng đã hủy xác nhận
+                Swal.fire(
+                    'Đặt vé đã hủy!',
+                    '',
+                    'error'
+                );
+            }
+
+            dispatch(loadingReducer(false));
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            dispatch(loadingReducer(false));
         }
     }
-}
+};
