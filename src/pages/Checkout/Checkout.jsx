@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { datVe, layDanhSachPhongVe } from '../../redux/action/movieAction';
 import { useCallback } from 'react';
 
-export default function Checkout() {
+export default function Checkout(props) {
+  console.log(props)
 
   let { listTicket, userLogin } = useSelector(state => state.movieReducer)
   let [arrChooseSeat, setArrChooseSeat] = useState([])
@@ -46,7 +47,7 @@ export default function Checkout() {
   }, [])
 
   const renderSeats = () => {
-  console.log(listTicket)
+    console.log(listTicket)
     arrChooseSeat.sort((a, b) => a.tenGhe - b.tenGhe);
     // console.log("arrChooseSeat:", arrChooseSeat);
     return listTicket.danhSachGhe?.map((item, index) => {
@@ -268,10 +269,12 @@ export default function Checkout() {
           <div className="mt-auto">
             <button disabled={arrChooseSeat.length === 0 ? true : false}
               onClick={() => {
-                
+
                 let maLichChieu = id;
                 let danhSachVe = arrChooseSeat
                 dispatch(datVe({ maLichChieu, danhSachVe }))
+                props.setActiveTab('2')
+                props.enableTab2()
               }} className="text-center p-3 font-weight-bold text-white w-100 cursor-pointer border-0" style={{ backgroundColor: '#f17c43', borderRadius: '40px' }}
             >THANH TOÁN
             </button>

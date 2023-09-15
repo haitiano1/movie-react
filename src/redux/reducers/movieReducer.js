@@ -18,7 +18,6 @@ const initialState = {
   userLogin: userName,
   listTicket: {},
   postTickets: {},
-  // activeTabs: "1"
 }
 
 const movieReducer = createSlice({
@@ -58,7 +57,7 @@ const movieReducer = createSlice({
   }
 });
 
-export const { getMovies, logout, paginationMovies, getCinemas, getShowTimes, getDetailMovies, login, getListTicket, loadingReducer, bookTickets,setActiveTab } = movieReducer.actions
+export const { getMovies, logout, paginationMovies, getCinemas, getShowTimes, getDetailMovies, login, getListTicket, loadingReducer, bookTickets, setActiveTab } = movieReducer.actions
 
 export default movieReducer.reducer
 

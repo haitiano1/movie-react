@@ -212,48 +212,27 @@ export const datVe = (infoTicket) => {
     return async (dispatch) => {
         dispatch(loadingReducer(true));
         try {
-            // Hiển thị hộp thoại xác nhận
-            const confirmResult = await Swal.fire({
-                text: "Bạn chắc chắn muốn đặt vé ?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Đặt vé'
+            const result = await axios({
+                method: 'POST',
+                url: `${URL_API}QuanLyDatVe/DatVe`,
+                data: infoTicket,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
             });
-
-            if (confirmResult.isConfirmed) {
-                // Nếu người dùng đã xác nhận, thực hiện đặt vé
-                const result = await axios({
-                    method: 'POST',
-                    url: `${URL_API}QuanLyDatVe/DatVe`,
-                    data: infoTicket,
-                    headers: {
-                        'TokenCybersoft': TOKEN_CYBER,
-                        'Authorization': "Bearer " + getAccessToken
-                    }
-                });
-
-                // Cập nhật trạng thái ứng dụng sau khi đặt vé thành công
-                const action = bookTickets(result.data.content)
-                dispatch(action)
-                dispatch(layDanhSachPhongVe(infoTicket.maLichChieu))
-
-                Swal.fire(
-                    'Đặt vé thành công!',
-                    '',
-                    'success'
-                );
-            } else {
-                // Người dùng đã hủy xác nhận
-                Swal.fire(
-                    'Đặt vé đã hủy!',
-                    '',
-                    'error'
-                );
-            }
-
             dispatch(loadingReducer(false));
+            const action = bookTickets(result.data.content)
+            dispatch(action)
+            dispatch(layDanhSachPhongVe(infoTicket.maLichChieu))
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Đặt vé thành công!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
         } catch (error) {
             console.log(error);
             dispatch(loadingReducer(false));
