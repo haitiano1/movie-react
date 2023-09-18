@@ -12,7 +12,7 @@ export default function MenuCheckout(props) {
     return <Redirect to='/login' />
   }
   const enableTab2 = () => {
-    setIsTab2Enabled(true); // Khi đặt vé thành công, bật tab 2
+    setIsTab2Enabled(true);
   };
   const onChange = (key) => {
     console.log(key);

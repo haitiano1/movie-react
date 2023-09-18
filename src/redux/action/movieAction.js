@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
+import { infoProfileUser,getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
 
@@ -80,6 +80,30 @@ export const dangNhapAction = (infoUser) => {
                 title: 'Oops...',
                 text: 'Tài khoản hoặc mật khẩu không đúng!',
             })
+        }
+    }
+}
+
+export const layThongTinNguoiDung = (infoUser) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'POST',
+                data: infoUser,
+                url: `${URL_API}QuanLyNguoiDung/ThongTinTaiKhoan`,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
+            });
+            dispatch(loadingReducer(false));
+            const action = infoProfileUser(result.data.content)
+            dispatch(action)
+
+        } catch (error) {
+            dispatch(loadingReducer(false));
+            console.log(error)
         }
     }
 }

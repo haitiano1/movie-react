@@ -18,6 +18,7 @@ const initialState = {
   userLogin: userName,
   listTicket: {},
   postTickets: {},
+  userInfo:{}
 }
 
 const movieReducer = createSlice({
@@ -51,13 +52,16 @@ const movieReducer = createSlice({
     bookTickets(state, action) {
       state.postTickets = action.payload
     },
+    infoProfileUser(state, action) {
+      state.userInfo = action.payload
+    },
     loadingReducer: (state, action) => {
       state.isLoading = action.payload
     }
   }
 });
 
-export const { getMovies, logout, paginationMovies, getCinemas, getShowTimes, getDetailMovies, login, getListTicket, loadingReducer, bookTickets, setActiveTab } = movieReducer.actions
+export const { infoProfileUser, getMovies, logout, paginationMovies, getCinemas, getShowTimes, getDetailMovies, login, getListTicket, loadingReducer, bookTickets, setActiveTab } = movieReducer.actions
 
 export default movieReducer.reducer
 

@@ -16,6 +16,7 @@ import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
 import Checkout from './pages/Checkout/Checkout';
 import MenuCheckout from './pages/Checkout/MenuCheckout';
+import Profile from './pages/Profile/Profile';
 export const history = createBrowserHistory();
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
     <Loading/>
       <Switch>
         <HomeTemplate path="/detail/:id" component={DetailMovies} />
+        <HomeTemplate path="/profile" component={Profile} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/checkout/:id" component={MenuCheckout} />

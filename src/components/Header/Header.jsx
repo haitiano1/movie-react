@@ -33,7 +33,9 @@ export default function Header() {
                             <Button className='font-weight-bold ml-3' type="primary" danger>Đăng ký</Button>
                         </NavLink>
                     </div>) : (<div className='d-flex align-items-center'>
-                        <img width={36} className='border border-danger border-2 rounded-circle' src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="" />
+                        <NavLink to='/profile'>
+                            <img width={36} className='border border-danger border-2 rounded-circle' src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="" />
+                        </NavLink>
                         <span className='font-weight-bold ml-2 d-none d-sm-block'>{userLogin?.taiKhoan}</span>
                         <Button onClick={() => {
                             Swal.fire({
