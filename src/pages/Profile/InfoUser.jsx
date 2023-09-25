@@ -1,14 +1,13 @@
 import { Button, Form, Input, Space } from 'antd';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react'
-import { capNhatThongTinNguoiDung } from '../../redux/action/movieAction';
+import { capNhatThongTinNguoiDung, layThongTinNguoiDung } from '../../redux/action/movieAction';
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 
 export default function InfoUser(props) {
   let dispatch = useDispatch()
   let { userInfo } = props
-  console.log(userInfo)
-
 
   const formik = useFormik({
 
@@ -22,12 +21,23 @@ export default function InfoUser(props) {
       hoTen: userInfo.hoTen,
     },
     onSubmit: values => {
-      console.log("VALUES", values)
-      dispatch(capNhatThongTinNguoiDung(values))
+
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Cập nhật thành công',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+      for(const val in values){
+        if(values[val] !== undefined){
+          userInfo = {...userInfo, [val] : values[val]}
+        }
+      }
+      dispatch(capNhatThongTinNguoiDung(userInfo))
     },
   });
-  console.log(formik.values) // clg này ra undefined
-
 
   return (
     <>
@@ -91,21 +101,9 @@ export default function InfoUser(props) {
                 />
               </div>
             </div>
-            <div className="col-md-6 col-12">
-              <div className="form-group">
-                <label>Nhập lại mật khẩu</label>
-                <input
-                  className="form-control form-control-sm"
-                  defaultValue={userInfo?.matKhau}
-                  type="text"
-                  name="matKhau"
-                  onChange={formik.handleChange}
-                />
-              </div>
-            </div>
           </div>
           <div className="mt-6">
-            <button type="submit" className='font-weight-bold'>Cập nhật</button>
+            <button type="submit" className='font-weight-bold btn btn-danger btn-sm'>Cập nhật</button>
           </div>
         </form>
 

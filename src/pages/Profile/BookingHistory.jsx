@@ -48,10 +48,10 @@ export default function BookingHistory(props) {
             }
         },
 
-    ];
+    ]
     return (
         <div>
-            <Table dataSource={data} columns={columns} rowKey="maVe" />;
+            <Table dataSource={data} columns={columns} rowKey="maVe" />
         </div>
     )
 }
