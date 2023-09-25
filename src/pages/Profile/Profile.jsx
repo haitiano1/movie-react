@@ -12,7 +12,6 @@ export default function Profile() {
   let {userInfo} = useSelector(state => state.movieReducer)
   let dispatch = useDispatch()
 
-
   useEffect(() => {
     const action = layThongTinNguoiDung();
     dispatch(action);
@@ -22,9 +21,6 @@ export default function Profile() {
     return <Redirect to='/login' />
   }
 
-  const onChange = (key) => {
-    console.log(key);
-  };
   const items = [
     {
       key: '1',
@@ -51,7 +47,7 @@ export default function Profile() {
         </h4>
       </div>
       <div className="col-9">
-        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+        <Tabs defaultActiveKey="1" items={items} />
       </div>
     </div>
   )

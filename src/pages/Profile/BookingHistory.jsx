@@ -6,6 +6,7 @@ export default function BookingHistory(props) {
     const { userInfo } = props
     const data = userInfo?.thongTinDatVe;
     console.log(userInfo)
+    console.log(data)
 
     const columns = [
         {
@@ -30,6 +31,7 @@ export default function BookingHistory(props) {
             title: "Tên rạp",
             dataIndex: "danhSachGhe",
             render: (text, data) => {
+                console.log(text[0])
                 return text[0].tenHeThongRap;
             }
         },
@@ -49,7 +51,7 @@ export default function BookingHistory(props) {
     ];
     return (
         <div>
-            <Table dataSource={data} columns={columns} />;
+            <Table dataSource={data} columns={columns} rowKey="maVe" />;
         </div>
     )
 }

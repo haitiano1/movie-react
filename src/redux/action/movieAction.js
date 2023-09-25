@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { infoProfileUser,getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
+import { infoProfileUser, getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
 
@@ -94,7 +94,7 @@ export const layThongTinNguoiDung = (infoUser) => {
                 url: `${URL_API}QuanLyNguoiDung/ThongTinTaiKhoan`,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER,
-                    'Authorization': "Bearer " + getAccessToken
+                    'Authorization': "Bearer " + localStorage.getItem(ACCESS_TOKEN)
                 }
             });
             dispatch(loadingReducer(false));
@@ -257,6 +257,32 @@ export const datVe = (infoTicket) => {
                 timer: 1500
             })
 
+        } catch (error) {
+            console.log(error);
+            dispatch(loadingReducer(false));
+        }
+    }
+};
+
+export const capNhatThongTinNguoiDung = (data) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'PUT',
+                url: `${URL_API}QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+                data: data,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
+            });
+            if (result.status === 200) {
+                console.log(result.data.content);
+            } else {
+                console.log('loi')
+            }
+            dispatch(loadingReducer(false));
         } catch (error) {
             console.log(error);
             dispatch(loadingReducer(false));
