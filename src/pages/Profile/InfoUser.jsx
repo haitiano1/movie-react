@@ -26,6 +26,8 @@ export default function InfoUser(props) {
       dispatch(capNhatThongTinNguoiDung(values))
     },
   });
+  console.log(formik.values) // clg này ra undefined
+
 
   return (
     <>
