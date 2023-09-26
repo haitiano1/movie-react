@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Card, Button } from 'antd';
+import { Row, Col, Card, Button, Pagination } from 'antd';
 import { layDanhSachPhimPhanTrang } from '../../redux/action/movieAction.js';
-import Pagination from '../Pagination/Pagination.jsx';
 import { history } from '../../App.js';
 export default function ListMovies() {
     const { Meta } = Card;
@@ -20,8 +19,8 @@ export default function ListMovies() {
                 {listMoviesPagination?.items?.map((item) => (
                     <Col key={item.maPhim} xs={24} sm={12} md={8} lg={6} xl={6}>
                         <Card onClick={() => {
-                                history.push(`/detail/${item.maPhim}`);
-                            }}
+                            history.push(`/detail/${item.maPhim}`);
+                        }}
                             hoverable
                             style={{ width: 240 }}
                             cover={<img alt="example" src={item.hinhAnh} style={{ objectFit: 'cover', height: 400 }} />}
@@ -34,7 +33,10 @@ export default function ListMovies() {
                     </Col>
                 ))}
             </Row>
-            <Pagination totalPage={listMoviesPagination.totalPages} layDanhSachPhimPhanTrang={layDanhSachPhimPhanTrang} />
+            <Pagination onChange={(soTrang) => {
+                const action = layDanhSachPhimPhanTrang(soTrang)
+                dispatch(action)
+            }} className='text-center mt-3' defaultPageSize={1} total={listMoviesPagination.totalPages} />
         </div>
     )
 }

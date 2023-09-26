@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Tabs } from 'antd';
+import { RollbackOutlined } from '@ant-design/icons'
 import { NavLink, Redirect } from 'react-router-dom/cjs/react-router-dom'
 import { userMovie } from '../../ulti/setting';
 import Checkout from './Checkout';
@@ -42,6 +43,9 @@ export default function MenuCheckout(props) {
   ];
   return (
     <div className='py-5 container'>
+      <NavLink to="/">
+        <a className='float-right text-danger d-flex align-items-center cursor-pointer font-weight-nomal '><RollbackOutlined className='mr-1' /> Quay về trang chủ</a>
+      </NavLink>
       <Tabs activeKey={activeTab} defaultActiveKey="1" items={items} onChange={onChange} />
     </div>
   )

@@ -5,21 +5,22 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Button } from 'antd';
 import style from './seats.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { datVe, layDanhSachPhongVe } from '../../redux/action/movieAction';
+import { datVe, layDanhSachPhongVe, layThongTinNguoiDung } from '../../redux/action/movieAction';
 import { useCallback } from 'react';
 
 export default function Checkout(props) {
-  console.log(props)
 
-  let { listTicket, userLogin } = useSelector(state => state.movieReducer)
+  let { userInfo, listTicket, userLogin } = useSelector(state => state.movieReducer)
   let [arrChooseSeat, setArrChooseSeat] = useState([])
-
+  console.log(userInfo)
   let dispatch = useDispatch()
 
   let { id } = useParams()
   useEffect(() => {
     const action = layDanhSachPhongVe(id);
     dispatch(action);
+    const action2 = layThongTinNguoiDung();
+    dispatch(action2);
   }, []);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function Checkout(props) {
   }, [])
 
   const renderSeats = () => {
-    console.log(listTicket)
+    // console.log(listTicket)
     arrChooseSeat.sort((a, b) => a.tenGhe - b.tenGhe);
     // console.log("arrChooseSeat:", arrChooseSeat);
     return listTicket.danhSachGhe?.map((item, index) => {
@@ -246,12 +247,12 @@ export default function Checkout(props) {
             <hr />
             <div className="mt-1 mb-2">
               <p className="text-muted text-sm">Email</p>
-              <p>{userLogin.email}</p>
+              <p>{userInfo.email}</p>
             </div>
             <hr />
             <div className="mt-1 mb-2">
               <p className="text-muted text-sm">Số điện thoại</p>
-              <p>{userLogin.soDT}</p>
+              <p>{userInfo.soDT}</p>
             </div>
             <hr />
             <div className="mt-1 mb-2 d-flex justify-content-between align-items-center">
