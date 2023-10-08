@@ -54,7 +54,6 @@ export default function DetailMovies(props) {
                                                 {rap.lichChieuPhim.map((lichChieu) => {
                                                     return <span key={lichChieu.maLichChieu}> 
                                                         <Button  onClick={() => {
-                                                            localStorage.setItem("DetailFlim",JSON.stringify(detailMovies))
                                                             history.push(`/checkout/${lichChieu.maLichChieu}`)
                                                         }} className='font-weight-bold mr-2' type="primary" danger size='small'>
                                                             {lichChieu.tenRap} - {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}

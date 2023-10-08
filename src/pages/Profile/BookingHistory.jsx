@@ -5,8 +5,6 @@ import React from 'react'
 export default function BookingHistory(props) {
     const { userInfo } = props
     const data = userInfo?.thongTinDatVe;
-    // console.log(userInfo)
-    // console.log(data)
 
     const columns = [
         {

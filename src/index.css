@@ -58,6 +58,59 @@ code {
 .ant-tabs-left>div>.ant-tabs-content-holder>.ant-tabs-content>.ant-tabs-tabpane {
   padding-left: 0;
 }
+/* Sider */
+:where(.css-1km3mtt).ant-layout .ant-layout-sider {
+  background-color: white;
+  border-right: 1px solid rgb(202, 202, 202);
+}
+
+:where(.css-1km3mtt).ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
+  background-color: #ff7733;
+}
+
+:where(.css-1km3mtt).ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-submenu-title:hover {
+  background-color: #ff7733;
+}
+
+:where(.css-1km3mtt).ant-layout .ant-layout-sider-trigger {
+  background-color: #ffffff;
+}
+:where(.css-dev-only-do-not-override-fpg3f5).ant-form input[type="file"] {
+  display: none;
+}
+:where(.css-dev-only-do-not-override-fpg3f5).ant-switch.ant-switch-checked {
+  background: #ff7733;
+}
+:where(.css-dev-only-do-not-override-fpg3f5).ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
+  background: #ff7733;
+}
+:where(.css-dev-only-do-not-override-fpg3f5).ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+  border-color: #f88f5b;
+  background-color: #f88f5b;
+}
+
+.btn-adm{
+    display: inline-block;
+    background-color: green;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: .3s;
+  border-radius: 6px;
+}
+.custom-file-upload:hover {
+  border: 1px solid #ff7733;
+  color: #ff7733;
+}
+
 .inline-block{
   display: inline-block;
 }

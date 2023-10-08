@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom/cjs/react-router-dom'
 import { userMovie } from '../../ulti/setting';
 import { layThongTinNguoiDung } from '../../redux/action/movieAction';
 import BookingHistory from './BookingHistory';
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Profile() {
 
@@ -45,6 +46,7 @@ export default function Profile() {
         <h4 className="text-lg font-bold text-black dark:text-white mt-2">
         {userInfo?.taiKhoan}
         </h4>
+        {userInfo?.maLoaiNguoiDung === "QuanTri" ? <NavLink to="/admin/user" ><div className='btn-adm'>Trang Quản Trị</div></NavLink> : ''}
       </div>
       <div className="col-9">
         <Tabs defaultActiveKey="1" items={items} />

@@ -11,7 +11,6 @@ export default function ListMovies() {
         const action = layDanhSachPhimPhanTrang(1)
         dispatch(action)
     }, [])
-    // console.log(listMoviesPagination)
     return (
         <div className='text-center mt-5 container'>
             <h3 className='font-weight-bold mb-3'>DANH SÁCH PHIM</h3>

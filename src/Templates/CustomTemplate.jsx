@@ -5,6 +5,7 @@ import Carousels from '../pages/Carousels/Carousels'
 import ListMovies from '../pages/ListMovies/ListMovies'
 import LogoCinema from '../pages/MoviesShowTime/Cinema/LogoCinema'
 import Footer from '../components/Footer/Footer'
+import SiderAdmin from '../components/Sider/SiderAdmin'
 export default function CustomTemplate(props) {
     return (
         <Route exact path={props.path} render={(propsRoute) => {

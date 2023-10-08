@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { infoProfileUser, getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
+import { infoProfileUser,getUser, getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
 
@@ -113,7 +113,7 @@ export const layDanhSachPhim = () => {
         try {
             const result = await axios({
                 method: 'GET',
-                url: `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP01`,
+                url: `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP03`,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER
                 }
@@ -289,3 +289,20 @@ export const capNhatThongTinNguoiDung = (data) => {
         }
     }
 };
+
+export const layDanhSachNguoiDung = () => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                method: 'GET',
+                url: `${URL_API}QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP00`,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER
+                }
+            });
+            const action = getUser(result.data.content)
+            dispatch(action)
+        } catch (error) {
+        }
+    }
+}
