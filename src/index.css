@@ -126,8 +126,8 @@ code {
 }
 
 .normalSeat {
-  width: 35px;
-  height: 28px;
+  width: 29px;
+  height: 25px;
   border-radius: 6px;
   cursor: pointer;
   background-color: rgb(62, 81, 93);
@@ -140,7 +140,6 @@ code {
 
 .vipSeat{
   background-color: rgb(247, 181, 0);
-
 }
 
 .reservedSeat {
@@ -191,6 +190,9 @@ code {
     width: 26px;
     height: 21px;
   }
+  .backHome{
+    display: none;
+  }
 }
 
 @media screen and (max-width:560px) {
@@ -205,9 +207,6 @@ code {
     width: 22px;
     height: 19px;
   }
-}
-button:focus:not(:focus-visible){
-  outline: none;
 }
 
 @media screen and (max-width:465px) {

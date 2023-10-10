@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { infoProfileUser,getUser, getMovies, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
+import { infoProfileUser,getUser, getMovies,getMovieInfo, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
 
@@ -119,6 +119,25 @@ export const layDanhSachPhim = () => {
                 }
             });
             const action = getMovies(result.data.content)
+            dispatch(action)
+        } catch (error) {
+        }
+    }
+}
+
+export const layThongTinPhim = (id) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'GET',
+                url: `${URL_API}QuanLyPhim/LayThongTinPhim?MaPhim=${id}`,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER
+                }
+            });
+            dispatch(loadingReducer(false));
+            const action = getMovieInfo(result.data.content)
             dispatch(action)
         } catch (error) {
         }

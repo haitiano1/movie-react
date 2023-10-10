@@ -10,6 +10,21 @@ export default function BookingHistory(props) {
         {
             title: 'Tên phim',
             dataIndex: 'tenPhim',
+            sorter: (a, b) => {
+                let tenPhimA = a.tenPhim.toLowerCase().trim();
+                let tenPhimB = b.tenPhim.toLowerCase().trim();
+                if (tenPhimA > tenPhimB) {
+                  return 1;
+                }
+                return -1;
+              },
+              sortDirections: ['descend', 'ascend'],
+              render: (text) => {
+                if (text.length > 45) {
+                  return <span>{text.slice(0, 45)}...</span>;
+                }
+                return <span>{text}</span>;
+              }
         },
         {
             title: 'Hình ảnh',
@@ -35,11 +50,13 @@ export default function BookingHistory(props) {
         {
             title: "Mã vé",
             dataIndex: "maVe",
+            sorter: (a, b) => b.maVe - a.maVe,
             value: (text) => <div>{text}</div>
         },
         {
             title: "Tổng tiền",
             dataIndex: "giaVe",
+            sorter: (a, b) => b.giaVe - a.giaVe,
             render: (text, data) => {
                 return (text * data.danhSachGhe.length).toLocaleString() + "đ";
             }

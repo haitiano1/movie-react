@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { UploadOutlined } from '@ant-design/icons';
 import {
     Button,
@@ -11,8 +11,40 @@ import {
 } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import TextArea from 'antd/es/input/TextArea';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useDispatch, useSelector } from 'react-redux';
+import { layThongTinPhim } from '../../redux/action/movieAction';
+import { useFormik } from 'formik';
 
 export default function EditMovie() {
+    let { movieInfo } = useSelector(state => state.movieReducer)
+    let dispatch = useDispatch()
+    let { id } = useParams()
+    // console.log(id)
+    useEffect(() => {
+        const action = layThongTinPhim(id);
+        dispatch(action);
+    }, []);
+    // console.log(movieInfo)
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            maPhim: movieInfo.maPhim,
+            tenPhim: movieInfo.tenPhim,
+            trailer: movieInfo.trailer,
+            moTa: movieInfo.moTa,
+            ngayKhoiChieu: movieInfo.ngayKhoiChieu,
+            dangChieu: movieInfo.dangChieu,
+            sapChieu: movieInfo.sapChieu,
+            hot: movieInfo.hot,
+            danhGia: movieInfo.danhGia,
+            hinhAnh: null
+        },
+        onSubmit: (values) => {
+            console.log(values)
+        }
+    })
+
     return (
         <>
             <Content  >
@@ -24,6 +56,7 @@ export default function EditMovie() {
                 >
                     <h5 className='text-center mb-4 font-weight-bold'>CẬP NHẬT PHIM</h5>
                     <Form
+                        onSubmitCapture={formik.handleSubmit}
                         className='max-w-full ml-6'
                         labelCol={{
                             span: 6,
@@ -36,15 +69,16 @@ export default function EditMovie() {
                         <div className='row'>
                             <div className='col-md-6'>
                                 <Form.Item label="Tên phim">
-                                    <Input name='tenPhim' />
+                                    <Input name='tenPhim' value={formik.values.tenPhim} onChange={formik.handleChange} />
                                 </Form.Item>
                                 <Form.Item label="Trailer">
-                                    <Input name='trailer' />
+                                    <Input name='trailer' value={formik.values.trailer} onChange={formik.handleChange} />
                                 </Form.Item>
                                 <Form.Item label="Mô tả">
                                     <TextArea
                                         style={{ height: 110 }}
-                                        name='moTa' />
+                                        name='moTa' value={formik.values.moTa} onChange={formik.handleChange} />
+
                                 </Form.Item>
                                 {/* DD/MM/YYYY */}
                                 <Form.Item label="Ngày chiếu">
@@ -53,18 +87,18 @@ export default function EditMovie() {
 
                             </div>
                             <div className='col-md-6'>
-                                <Form.Item label="Trạng thái" >
-                                    <Radio.Group className='d-flex'>
-                                        <Radio value='dangChieu'>Đang chiếu</Radio>
-                                        <Radio value='sapChieu'>Sắp chiếu</Radio>
-                                    </Radio.Group>
+                                <Form.Item label="Đang chiếu" valuePropName="checked" >
+                                    <Switch checked={formik.values.dangChieu} />
+                                </Form.Item>
+                                <Form.Item label="Sắp chiếu" valuePropName="checked" >
+                                    <Switch checked={formik.values.sapChieu} />
                                 </Form.Item>
                                 <Form.Item label="Phim Hot" valuePropName="checked" >
-                                    <Switch />
+                                    <Switch checked={formik.values.hot} />
                                 </Form.Item>
                                 {/* Star */}
                                 <Form.Item label="Số sao">
-                                    <InputNumber defaultValue={5} min={1} max={10} />
+                                    <InputNumber value={formik.values.danhGia} name='danhGia' onChange={formik.handleChange} min={1} max={10} />
                                 </Form.Item>
                                 {/* UPLOAD FILE */}
                                 <Form.Item label="Hình ảnh">
@@ -79,9 +113,8 @@ export default function EditMovie() {
                         {/* ===================== */}
                         <hr className='mb-4' />
                         <div className='text-center'>
-                            <Button type="primary" danger
-                                className='font-weight-bold'
-                            >Thêm phim</Button>
+                            <button type='submit' className='btn btn-danger font-weight-bold'
+                            >Cập nhật</button>
                         </div>
 
                     </Form>

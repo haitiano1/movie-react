@@ -35,7 +35,7 @@ export default function MenuCheckout(props) {
           <img src="https://img.freepik.com/premium-psd/3d-render-cinema-ticket-popup-from-smartphone-with-booking-tickets-onling_252008-537.jpg?w=1380" className='w-50' alt="" />
           <p className='mt-2 text-danger font-weight-bold' style={{ fontSize: '16px' }}>HAINETFLIX CHÚC BẠN XEM PHIM VUI VẺ ^^</p>
           <NavLink to="/">
-            <button className="p-2 font-weight-bold text-white cursor-pointer border-0" style={{ backgroundColor: '#f17c43', borderRadius: '16px', width: '25%' }}>Quay Lại Trang Chủ</button>
+            <button className="backHome p-2 font-weight-bold text-white cursor-pointer border-0 " style={{ backgroundColor: '#f17c43', borderRadius: '16px', width: '25%' }}>Quay Lại Trang Chủ</button>
           </NavLink>
         </div>
       </>,
