@@ -1,7 +1,7 @@
 import { Button, Table, Tooltip } from 'antd';
 import moment from 'moment';
 import React, { useEffect } from 'react'
-import { EditOutlined, DeleteOutlined, CheckCircleOutlined, CloseCircleOutlined, CalendarOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, CheckCircleOutlined, CloseCircleOutlined, CalendarOutlined, SearchOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { layDanhSachPhim } from '../../redux/action/movieAction';
 import { NavLink } from 'react-router-dom';
@@ -109,7 +109,25 @@ export default function MovieAdmin() {
 
 
   return (
-    <div>
+    <div className='text-center'>
+      <h4 className='py-3'>Danh sách phim</h4>
+      <div className='d-flex justify-content-center mb-4'>
+        <NavLink to="/admin/add-new">
+          <button className='btn btn-outline-danger mr-4 rounded-lg btn-sm'>
+            Thêm phim mới
+          </button>
+        </NavLink>
+        <div className="d-flex input-group-sm">
+          <input
+            className="form-control p-0 pl-3 py-1 rounded-start text-sm"
+            style={{ border: "1px solid #999" }}
+            placeholder="Nhập từ khóa tìm kiếm"
+          />
+          <button className="btn btn-primary px-3 border-0 rounded-end btn-sm ml-2 " style={{ backgroundColor: '#ff7733' }}>
+            <SearchOutlined />
+          </button>
+        </div>
+      </div>
       <Table dataSource={data} columns={columns} rowKey="maPhim" />
     </div>
   )

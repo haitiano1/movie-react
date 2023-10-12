@@ -15,7 +15,8 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useDispatch, useSelector } from 'react-redux';
 import { layThongTinPhim } from '../../redux/action/movieAction';
 import { useFormik } from 'formik';
-
+import moment from 'moment';
+import dayjs from 'dayjs';
 export default function EditMovie() {
     let { movieInfo } = useSelector(state => state.movieReducer)
     let dispatch = useDispatch()
@@ -44,6 +45,15 @@ export default function EditMovie() {
             console.log(values)
         }
     })
+    const handleChangeDatePicker = (value) => {
+        let ngayKhoiChieu = dayjs(value)
+        formik.setFieldValue('ngayKhoiChieu', ngayKhoiChieu)
+    }
+    const handleChangeSwitch = (name) => {
+        return (value) => {
+            formik.setFieldValue(name, value)
+        }
+    }
 
     return (
         <>
@@ -82,19 +92,18 @@ export default function EditMovie() {
                                 </Form.Item>
                                 {/* DD/MM/YYYY */}
                                 <Form.Item label="Ngày chiếu">
-                                    <DatePicker />
+                                <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} value={dayjs(dayjs(formik.values.ngayKhoiChieu).format('DD/MM/YYYY'), 'DD/MM/YYYY')} />
                                 </Form.Item>
-
                             </div>
                             <div className='col-md-6'>
                                 <Form.Item label="Đang chiếu" valuePropName="checked" >
-                                    <Switch checked={formik.values.dangChieu} />
+                                    <Switch checked={formik.values.dangChieu} onChange={handleChangeSwitch('dangChieu')}/>
                                 </Form.Item>
-                                <Form.Item label="Sắp chiếu" valuePropName="checked" >
-                                    <Switch checked={formik.values.sapChieu} />
+                                <Form.Item label="Sắp chiếu" valuePropName="checked"  >
+                                    <Switch checked={formik.values.sapChieu} onChange={handleChangeSwitch('sapChieu')} />
                                 </Form.Item>
                                 <Form.Item label="Phim Hot" valuePropName="checked" >
-                                    <Switch checked={formik.values.hot} />
+                                    <Switch checked={formik.values.hot} onChange={handleChangeSwitch('hot')}/>
                                 </Form.Item>
                                 {/* Star */}
                                 <Form.Item label="Số sao">
@@ -110,7 +119,6 @@ export default function EditMovie() {
 
                             </div>
                         </div>
-                        {/* ===================== */}
                         <hr className='mb-4' />
                         <div className='text-center'>
                             <button type='submit' className='btn btn-danger font-weight-bold'

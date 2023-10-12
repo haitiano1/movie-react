@@ -7,6 +7,7 @@ import MovieAdmin from '../../pages/Admin/MovieAdmin';
 import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import AddMovie from '../../pages/Admin/AddMovie';
 import EditMovie from '../../pages/Admin/EditMovie';
+import AddUser from '../../pages/Admin/AddUser';
 
 const { Sider, Content } = Layout;
 const items = [
@@ -38,7 +39,7 @@ export default function SiderAdmin() {
   }, [location]);
   useEffect(() => {
     window.scrollTo(0, 0);
-}, []);
+  }, []);
 
   const handleMenuItemClick = (key) => {
     setSelectedKey(key);
@@ -77,10 +78,11 @@ export default function SiderAdmin() {
           {selectedKey === '/admin/user' && <UserAdmin />}
           {selectedKey === '/admin/movie' && <MovieAdmin />}
           {selectedKey === '/admin/add-new' && <AddMovie />}
+          {selectedKey === '/admin/user/add-new' && <AddUser />}
 
           {selectedKey.startsWith('/admin/movie/edit/') && (
-        <EditMovie id={selectedKey.replace('/admin/movie/edit/', '')} />
-      )}
+            <EditMovie id={selectedKey.replace('/admin/movie/edit/', '')} />
+          )}
         </Content>
       </Layout>
     </Layout>
