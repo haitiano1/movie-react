@@ -92,18 +92,18 @@ export default function EditMovie() {
                                 </Form.Item>
                                 {/* DD/MM/YYYY */}
                                 <Form.Item label="Ngày chiếu">
-                                <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} value={dayjs(dayjs(formik.values.ngayKhoiChieu).format('DD/MM/YYYY'), 'DD/MM/YYYY')} />
+                                    <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} value={dayjs(dayjs(formik.values.ngayKhoiChieu).format('DD/MM/YYYY'), 'DD/MM/YYYY')} />
                                 </Form.Item>
                             </div>
                             <div className='col-md-6'>
                                 <Form.Item label="Đang chiếu" valuePropName="checked" >
-                                    <Switch checked={formik.values.dangChieu} onChange={handleChangeSwitch('dangChieu')}/>
+                                    <Switch checked={formik.values.dangChieu} onChange={handleChangeSwitch('dangChieu')} />
                                 </Form.Item>
                                 <Form.Item label="Sắp chiếu" valuePropName="checked"  >
                                     <Switch checked={formik.values.sapChieu} onChange={handleChangeSwitch('sapChieu')} />
                                 </Form.Item>
                                 <Form.Item label="Phim Hot" valuePropName="checked" >
-                                    <Switch checked={formik.values.hot} onChange={handleChangeSwitch('hot')}/>
+                                    <Switch checked={formik.values.hot} onChange={handleChangeSwitch('hot')} />
                                 </Form.Item>
                                 {/* Star */}
                                 <Form.Item label="Số sao">
@@ -124,7 +124,6 @@ export default function EditMovie() {
                             <button type='submit' className='btn btn-danger font-weight-bold'
                             >Cập nhật</button>
                         </div>
-
                     </Form>
                 </div>
             </Content>

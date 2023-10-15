@@ -1,17 +1,11 @@
 import React from 'react'
-import { UploadOutlined } from '@ant-design/icons';
 import {
     Button,
-    DatePicker,
     Form,
     Input,
-    InputNumber,
-    Radio,
-    Select,
-    Switch
+    Select
 } from 'antd';
 import { Content } from 'antd/es/layout/layout';
-import TextArea from 'antd/es/input/TextArea';
 
 export default function AddUser() {
     return (

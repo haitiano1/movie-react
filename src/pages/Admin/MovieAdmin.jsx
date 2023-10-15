@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { layDanhSachPhim } from '../../redux/action/movieAction';
 import { NavLink } from 'react-router-dom';
 
+function handleDeleteFilm(maPhim) {
+  alert(`Bạn có chắc chắn muốn xoá phim có mã: ${maPhim}?`)
+}
+
 const columns = [
   {
     title: 'Mã phim',
@@ -80,7 +84,7 @@ const columns = [
         </Tooltip>
         <Tooltip title="Xoá phim" color="red">
           <Button
-            className="d-flex align-items-center bg-danger text-white ml-1 mr-1"
+            className="d-flex align-items-center bg-danger text-white ml-1 mr-1" onClick={() => handleDeleteFilm(film.maPhim)}
           >
             <DeleteOutlined />
           </Button>
@@ -95,7 +99,7 @@ const columns = [
       </div>
     ),
   },
-
+  
 ]
 export default function MovieAdmin() {
   let { listMovies } = useSelector(state => state.movieReducer)

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { infoProfileUser,getUser, getMovies,getMovieInfo, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
+import { infoProfileUser, getUser, getMovies, getMovieInfo, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
 
@@ -113,7 +113,7 @@ export const layDanhSachPhim = () => {
         try {
             const result = await axios({
                 method: 'GET',
-                url: `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP03`,
+                url: `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP01`,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER
                 }
@@ -150,7 +150,7 @@ export const layDanhSachPhimPhanTrang = (soTrang = 2, soPhanTuTrenTrang = 8) => 
         try {
             const result = await axios({
                 method: 'GET',
-                url: `${URL_API}QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP03&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
+                url: `${URL_API}QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP07&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER
                 }
@@ -325,3 +325,63 @@ export const layDanhSachNguoiDung = () => {
         }
     }
 }
+
+export const themPhimUploadHinh = (formData) => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                method: 'POST',
+                url: `${URL_API}QuanLyPhim/ThemPhimUploadHinh`,
+                data: formData,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                }
+            });
+            if (result.status === 200) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'bottom',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Thêm phim thành công'
+                  })
+
+                  history.push('/admin/movie')
+            } else {
+                console.log('loi')
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+
+export const xoaPhim = (id) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'DELETE',
+                url: `${URL_API}QuanLyPhim/XoaPhim?MaPhim=${id}`,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
+            });
+            dispatch(loadingReducer(false));
+            dispatch(layDanhSachPhim())
+        } catch (error) {
+            console.log(error);
+            dispatch(loadingReducer(false));
+        }
+    }
+};
