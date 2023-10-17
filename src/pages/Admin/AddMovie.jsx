@@ -29,22 +29,22 @@ export default function AddMovie() {
             danhGia: 0,
             hinhAnh: {}
         },
-        onSubmit: (values) => { 
-            // console.log(values) 
-        
+        onSubmit: (values) => {
+            console.log(values)
+
             //tạo đối tượng formdata => Đưa giá trị values từ formik vào formdata
             let formData = new FormData()
-            for(let key in values) {
-                if (key !== 'hinhAnh'){
+            for (let key in values) {
+                if (key !== 'hinhAnh') {
                     formData.append(key, values[key]);
-                }else{
+                } else {
                     formData.append('File', values.hinhAnh, values.hinhAnh.name)
                 }
             }
             console.log('formData', formData.get('File'));
             //Gọi api gửi các giá trị formdata về backend xử lý
             dispatch(themPhimUploadHinh(formData))
-            
+
         }
     })
     const handleChangeDatePicker = (value) => {
@@ -65,12 +65,12 @@ export default function AddMovie() {
         //tạo đối tượng để đọc file
         let reader = new FileReader();
         reader.readAsDataURL(file)
-        reader.onload = (e) =>{
+        reader.onload = (e) => {
             // console.log(e.target.result)
             setImgSrc(e.target.result)
         }
         //đem dữ liệu file lưu vào formik
-        formik.setFieldValue('hinhAnh',file)
+        formik.setFieldValue('hinhAnh', file)
     }
 
     return (
@@ -99,12 +99,12 @@ export default function AddMovie() {
                                 </Form.Item>
                                 {/* DD/MM/YYYY */}
                                 <Form.Item label="Ngày chiếu">
-                                    <DatePicker format={'DD/MM/YYYY'} onChange={handleChangeDatePicker} />
+                                    <DatePicker format={'DD/MM/YYYY'} onChange={handleChangeDatePicker}  />
                                 </Form.Item>
 
                             </div>
                             <div className='col-md-6'>
-                                <Form.Item label="Đang chiếu"  >
+                                <Form.Item label="Đang chiếu">
                                     <Switch onChange={handleChangeSwitch('dangChieu')} />
                                 </Form.Item>
                                 <Form.Item label="Sắp chiếu"   >
@@ -115,7 +115,7 @@ export default function AddMovie() {
                                 </Form.Item>
                                 {/* Star */}
                                 <Form.Item label="Số sao">
-                                    <InputNumber onChange={(value) => { formik.setFieldValue('danhGia', value) }} min={1} max={10} />
+                                    <InputNumber onChange={(value) => { formik.setFieldValue('danhGia', value) }} defaultValue={5} min={1} max={10} />
                                 </Form.Item>
                                 {/* UPLOAD FILE */}
                                 <Form.Item label="Hình ảnh">
@@ -124,7 +124,7 @@ export default function AddMovie() {
                                         <UploadOutlined />  Chọn ảnh
                                     </label>
                                     <br />
-                                       {imgSrc && <img style={{width:200, height:150}} src={imgSrc} alt="..." accept="image/png, image/jpeg"/>} 
+                                    {imgSrc && <img style={{ width: 200, height: 150 }} src={imgSrc} alt="..." accept="image/png, image/jpeg" />}
                                 </Form.Item>
 
                             </div>

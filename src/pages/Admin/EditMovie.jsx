@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { UploadOutlined } from '@ant-design/icons';
 import {
     Button,
@@ -13,11 +13,12 @@ import { Content } from 'antd/es/layout/layout';
 import TextArea from 'antd/es/input/TextArea';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { useDispatch, useSelector } from 'react-redux';
-import { layThongTinPhim } from '../../redux/action/movieAction';
+import { capNhatPhimUpload, layThongTinPhim } from '../../redux/action/movieAction';
 import { useFormik } from 'formik';
 import moment from 'moment';
 import dayjs from 'dayjs';
 export default function EditMovie() {
+    const [imgSrc, setImgSrc] = useState('')
     let { movieInfo } = useSelector(state => state.movieReducer)
     let dispatch = useDispatch()
     let { id } = useParams()
@@ -34,7 +35,7 @@ export default function EditMovie() {
             tenPhim: movieInfo.tenPhim,
             trailer: movieInfo.trailer,
             moTa: movieInfo.moTa,
-            ngayKhoiChieu: movieInfo.ngayKhoiChieu,
+            ngayKhoiChieu: dayjs(movieInfo?.ngayKhoiChieu).format('DD/MM/YYYY'),
             dangChieu: movieInfo.dangChieu,
             sapChieu: movieInfo.sapChieu,
             hot: movieInfo.hot,
@@ -43,16 +44,42 @@ export default function EditMovie() {
         },
         onSubmit: (values) => {
             console.log(values)
+            let formData = new FormData()
+            for (let key in values) {
+                if (key !== 'hinhAnh') {
+                    formData.append(key, values[key]);
+                } else {
+                    if (values.hinhAnh !== null){
+                        formData.append('File', values.hinhAnh, values.hinhAnh.name)
+                    }
+                }
+            }
+            dispatch(capNhatPhimUpload(formData))
         }
     })
     const handleChangeDatePicker = (value) => {
-        let ngayKhoiChieu = dayjs(value)
-        formik.setFieldValue('ngayKhoiChieu', ngayKhoiChieu)
+        let ngayKhoiChieu = dayjs(value).format('DD/MM/YYYY');
+        formik.setFieldValue('ngayKhoiChieu', ngayKhoiChieu);
     }
     const handleChangeSwitch = (name) => {
         return (value) => {
             formik.setFieldValue(name, value)
         }
+    }
+    const handleChangeFile = async (e) => {
+        //lấy file từ event
+        let file = e.target.files[0]
+        // console.log(file)
+        //đem dữ liệu file lưu vào formik
+        await formik.setFieldValue('hinhAnh', file)
+        //tạo đối tượng để đọc file
+        let reader = new FileReader();
+        reader.readAsDataURL(file)
+        reader.onload = (e) => {
+            // console.log(e.target.result)
+            setImgSrc(e.target.result)
+        }
+        
     }
 
     return (
@@ -92,7 +119,7 @@ export default function EditMovie() {
                                 </Form.Item>
                                 {/* DD/MM/YYYY */}
                                 <Form.Item label="Ngày chiếu">
-                                    <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} value={dayjs(dayjs(formik.values.ngayKhoiChieu).format('DD/MM/YYYY'), 'DD/MM/YYYY')} />
+                                    <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} value={dayjs(formik.values.ngayKhoiChieu, 'DD/MM/YYYY')} />
                                 </Form.Item>
                             </div>
                             <div className='col-md-6'>
@@ -107,14 +134,17 @@ export default function EditMovie() {
                                 </Form.Item>
                                 {/* Star */}
                                 <Form.Item label="Số sao">
-                                    <InputNumber value={formik.values.danhGia} name='danhGia' onChange={formik.handleChange} min={1} max={10} />
+                                    <InputNumber onChange={(value) => { formik.setFieldValue('danhGia', value) }} value={formik.values.danhGia} min={1} max={10} />
                                 </Form.Item>
                                 {/* UPLOAD FILE */}
                                 <Form.Item label="Hình ảnh">
                                     <label className="custom-file-upload">
-                                        <input type="file" />
+                                        <input type="file" onChange={handleChangeFile} />
                                         <UploadOutlined />  Chọn ảnh
                                     </label>
+                                    <br />
+                                    <input name='hinhAnh' type={'file'} onChange={handleChangeFile} accept="image/png,img/jpeg, img/gift" />
+                                    <img src={imgSrc == '' ? movieInfo.hinhAnh : imgSrc} width={200} height={150} />
                                 </Form.Item>
 
                             </div>

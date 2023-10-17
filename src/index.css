@@ -16,6 +16,23 @@ code {
   background: #ff5e00;
   opacity: 1;
 }
+.custom-file-upload:hover {
+  border: 1px solid #ff7733;
+  color: #ff7733;
+}
+
+:where(.css-1km3mtt).ant-picker:hover,
+:where(.css-1km3mtt).ant-picker-focused {
+  border-color: #ff8600;
+}
+
+:where(.css-1km3mtt).ant-input-number:hover {
+  border-color: #ff8600;
+}
+.ant-picker-clear{
+  display: none;
+}
+
 
 .ant-carousel .slick-dots li button {
   width: 14px;

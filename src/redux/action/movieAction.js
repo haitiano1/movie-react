@@ -298,8 +298,6 @@ export const capNhatThongTinNguoiDung = (data) => {
             });
             if (result.status === 200) {
                 console.log(result.data.content);
-            } else {
-                console.log('loi')
             }
             dispatch(loadingReducer(false));
         } catch (error) {
@@ -334,7 +332,7 @@ export const themPhimUploadHinh = (formData) => {
                 url: `${URL_API}QuanLyPhim/ThemPhimUploadHinh`,
                 data: formData,
                 headers: {
-                    'TokenCybersoft': TOKEN_CYBER,
+                    'TokenCybersoft': TOKEN_CYBER
                 }
             });
             if (result.status === 200) {
@@ -356,11 +354,49 @@ export const themPhimUploadHinh = (formData) => {
                   })
 
                   history.push('/admin/movie')
-            } else {
-                console.log('loi')
             }
         } catch (error) {
             console.log(error);
+        }
+    }
+};
+
+export const capNhatPhimUpload = (formData) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'POST',
+                url: `${URL_API}QuanLyPhim/CapNhatPhimUpload`,
+                data: formData,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
+            });
+            if (result.status === 200) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'bottom',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Cập nhật thành công'
+                  })
+                  dispatch(loadingReducer(false));
+                  history.push('/admin/movie')
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(loadingReducer(false));
         }
     }
 };
