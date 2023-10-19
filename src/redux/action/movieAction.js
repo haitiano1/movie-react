@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { infoProfileUser, getUser, getMovies, getMovieInfo, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
+import { infoProfileUser, getUser, getMovies, getMovieInfo,searchUser, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
 
@@ -84,13 +84,12 @@ export const dangNhapAction = (infoUser) => {
     }
 }
 
-export const layThongTinNguoiDung = (infoUser) => {
+export const layThongTinNguoiDung = () => {
     return async (dispatch) => {
         dispatch(loadingReducer(true));
         try {
             const result = await axios({
                 method: 'POST',
-                data: infoUser,
                 url: `${URL_API}QuanLyNguoiDung/ThongTinTaiKhoan`,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER,
@@ -99,6 +98,27 @@ export const layThongTinNguoiDung = (infoUser) => {
             });
             dispatch(loadingReducer(false));
             const action = infoProfileUser(result.data.content)
+            dispatch(action)
+
+        } catch (error) {
+            dispatch(loadingReducer(false));
+            console.log(error)
+        }
+    }
+}
+export const timKiemNguoiDung = (id) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'GET',
+                url: `${URL_API}QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP00&tuKhoa=${id}`,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER
+                }
+            });
+            dispatch(loadingReducer(false));
+            const action = searchUser(result.data.content)
             dispatch(action)
 
         } catch (error) {
@@ -415,6 +435,89 @@ export const xoaPhim = (id) => {
             });
             dispatch(loadingReducer(false));
             dispatch(layDanhSachPhim())
+        } catch (error) {
+            console.log(error);
+            dispatch(loadingReducer(false));
+        }
+    }
+};
+
+export const themNguoiDung = (user) => {
+    return async (dispatch) => {
+        try {
+            const result = await axios({
+                method: 'POST',
+                url: `${URL_API}QuanLyNguoiDung/ThemNguoiDung`,
+                data: user,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
+            });
+            if (result.status === 200) {
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'bottom',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                  
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Thêm người dùng thành công'
+                  })
+
+                  history.push('/admin/user')
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+
+export const xoaNguoiDung = (id) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'DELETE',
+                url: `${URL_API}QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${id}`,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
+            });
+            dispatch(loadingReducer(false));
+            // dispatch(layDanhSachPhim())
+        } catch (error) {
+            console.log(error);
+            dispatch(loadingReducer(false));
+        }
+    }
+};
+
+export const capNhatThongTinNguoiDungAdmin = (data) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'POST',
+                url: `${URL_API}QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+                data: data,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
+            });
+            if (result.status === 200) {
+                console.log(result.data.content);
+            }
+            dispatch(loadingReducer(false));
         } catch (error) {
             console.log(error);
             dispatch(loadingReducer(false));

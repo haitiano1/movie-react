@@ -49,7 +49,7 @@ export default function EditMovie() {
                 if (key !== 'hinhAnh') {
                     formData.append(key, values[key]);
                 } else {
-                    if (values.hinhAnh !== null){
+                    if (values.hinhAnh !== null) {
                         formData.append('File', values.hinhAnh, values.hinhAnh.name)
                     }
                 }
@@ -79,7 +79,7 @@ export default function EditMovie() {
             // console.log(e.target.result)
             setImgSrc(e.target.result)
         }
-        
+
     }
 
     return (

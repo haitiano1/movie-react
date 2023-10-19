@@ -2,7 +2,7 @@ import { Table, Tooltip, Button } from 'antd';
 import React, { useEffect } from 'react'
 import { EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { layDanhSachNguoiDung } from '../../redux/action/movieAction';
+import { layDanhSachNguoiDung, xoaPhim } from '../../redux/action/movieAction';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
 
@@ -29,18 +29,22 @@ const columns = [
   },
   {
     title: 'Hành động',
-    render: (_, record) => ( // Sử dụng record thay vì dataIndex
+    render: (_, user) => ( // Sử dụng record thay vì dataIndex
       <>
         <Tooltip title="Edit" color="green">
-          <Button style={{ border: 'none' }}
+        <NavLink to={`/admin/user/edit/${user.taiKhoan}`}>
+        <Button style={{ border: 'none' }}
             className="text-success font-size-xl"
           >
             <EditOutlined />
           </Button>
+        </NavLink>
         </Tooltip>
         <Tooltip title="Delete" color="red">
           <Button style={{ border: 'none' }}
-            className="text-danger font-size-xl"
+            className="text-danger font-size-xl" onClick={()=>{
+              // dispatch(xoaNguoiDung(user.taiKhoan))
+            }}
           >
             <DeleteOutlined />
           </Button>

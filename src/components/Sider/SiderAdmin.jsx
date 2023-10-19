@@ -8,6 +8,7 @@ import { useLocation, useParams } from 'react-router-dom/cjs/react-router-dom.mi
 import AddMovie from '../../pages/Admin/AddMovie';
 import EditMovie from '../../pages/Admin/EditMovie';
 import AddUser from '../../pages/Admin/AddUser';
+import EditUser from '../../pages/Admin/EditUser';
 
 const { Sider, Content } = Layout;
 const items = [
@@ -82,6 +83,9 @@ export default function SiderAdmin() {
 
           {selectedKey.startsWith('/admin/movie/edit/') && (
             <EditMovie id={selectedKey.replace('/admin/movie/edit/', '')} />
+          )}
+          {selectedKey.startsWith('/admin/user/edit/') && (
+            <EditUser id={selectedKey.replace('/admin/user/edit/', '')} />
           )}
         </Content>
       </Layout>
