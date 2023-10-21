@@ -25,6 +25,7 @@ import AddMovie from './pages/Admin/AddMovie';
 import EditMovie from './pages/Admin/EditMovie';
 import AddUser from './pages/Admin/AddUser';
 import EditUser from './pages/Admin/EditUser';
+import MoviesShowTime from './pages/Admin/MoviesShowTime';
 export const history = createBrowserHistory();
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <AdminTemplate path="/admin/add-new" component={AddMovie} />
         <AdminTemplate path="/admin/user/add-new" component={AddUser} />
         <AdminTemplate path="/admin/user" component={UserAdmin} />
+        <AdminTemplate path="/admin/showtimes/:id" component={MoviesShowTime} />
 
         <HomeTemplate path="/detail/:id" component={DetailMovies} />
         <HomeTemplate path="/profile" component={Profile} />

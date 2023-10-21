@@ -9,6 +9,7 @@ import AddMovie from '../../pages/Admin/AddMovie';
 import EditMovie from '../../pages/Admin/EditMovie';
 import AddUser from '../../pages/Admin/AddUser';
 import EditUser from '../../pages/Admin/EditUser';
+import MoviesShowTime from '../../pages/Admin/MoviesShowTime';
 
 const { Sider, Content } = Layout;
 const items = [
@@ -52,9 +53,9 @@ export default function SiderAdmin() {
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <Menu
           style={{ minHeight: '100vh' }}
-          theme="light"
+          
           selectedKeys={[selectedKey]}
-          mode="inline"
+          mode="vertical"
         >
           {items.map((item) => (
             <Menu.Item
@@ -86,6 +87,9 @@ export default function SiderAdmin() {
           )}
           {selectedKey.startsWith('/admin/user/edit/') && (
             <EditUser id={selectedKey.replace('/admin/user/edit/', '')} />
+          )}
+          {selectedKey.startsWith('/admin/showtimes/') && (
+            <MoviesShowTime id={selectedKey.replace('/admin/showtimes/', '')} />
           )}
         </Content>
       </Layout>

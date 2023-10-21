@@ -87,16 +87,21 @@ const columns = [
           </Button>
         </Tooltip>
         <Tooltip title="Tạo lịch chiếu" color="green">
-          <Button
-            className="d-flex align-items-center bg-success text-white"
-          >
-            <CalendarOutlined />
-          </Button>
+          <NavLink onClick={() => {
+            localStorage.setItem('film', JSON.stringify(film))
+          }}
+            to={`/admin/showtimes/${film.maPhim}`}>
+            <Button
+              className="d-flex align-items-center bg-success text-white"
+            >
+              <CalendarOutlined />
+            </Button>
+          </NavLink>
         </Tooltip>
       </div>
     ),
   },
-  
+
 ]
 export default function MovieAdmin() {
   let { listMovies } = useSelector(state => state.movieReducer)
