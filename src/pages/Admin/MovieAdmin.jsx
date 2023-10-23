@@ -1,11 +1,11 @@
-import { Button, Table, Tooltip } from 'antd';
+import { Button, Table, Tooltip, Input} from 'antd';
 import moment from 'moment';
 import React, { useEffect } from 'react'
 import { EditOutlined, DeleteOutlined, CheckCircleOutlined, CloseCircleOutlined, CalendarOutlined, SearchOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { layDanhSachPhim, xoaPhim } from '../../redux/action/movieAction';
 import { NavLink } from 'react-router-dom';
-
+const { Search } = Input;
 
 const columns = [
   {
@@ -106,6 +106,9 @@ const columns = [
 export default function MovieAdmin() {
   let { listMovies } = useSelector(state => state.movieReducer)
   const data = listMovies;
+  const handleClickSearch = (e) => {
+    dispatch(layDanhSachPhim(e));
+  };
   let dispatch = useDispatch()
   useEffect(() => {
     const action = layDanhSachPhim()
@@ -124,14 +127,13 @@ export default function MovieAdmin() {
           </button>
         </NavLink>
         <div className="d-flex input-group-sm">
-          <input
-            className="form-control p-0 pl-3 py-1 rounded-start text-sm"
-            style={{ border: "1px solid #999" }}
-            placeholder="Nhập từ khóa tìm kiếm"
+          <Search
+            placeholder="Nhập từ khoá tìm kiếm"
+            allowClear
+            enterButton="Search"
+            size="middle"
+            onSearch={handleClickSearch}
           />
-          <button className="btn btn-primary px-3 border-0 rounded-end btn-sm ml-2 " style={{ backgroundColor: '#ff7733' }}>
-            <SearchOutlined />
-          </button>
         </div>
       </div>
       <Table dataSource={data} columns={columns} rowKey="maPhim" />

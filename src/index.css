@@ -88,6 +88,10 @@ code {
 :where(.css-1km3mtt).ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-submenu-title:hover {
   background-color: #ff7733;
 }
+:where(.css-dev-only-do-not-override-fpg3f5).ant-btn-primary {
+  color: #fff;
+  background-color: #ff7733
+}
 
 :where(.css-1km3mtt).ant-layout .ant-layout-sider-trigger {
   background-color: #ffffff;

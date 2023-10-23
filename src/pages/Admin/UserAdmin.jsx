@@ -1,9 +1,10 @@
-import { Table, Tooltip, Button } from 'antd';
+import { Table, Tooltip, Button, Input } from 'antd';
 import React, { useEffect } from 'react'
 import { EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { layDanhSachNguoiDung, xoaPhim } from '../../redux/action/movieAction';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+const { Search } = Input;
 
 
 const columns = [
@@ -32,17 +33,17 @@ const columns = [
     render: (_, user) => ( // Sử dụng record thay vì dataIndex
       <>
         <Tooltip title="Edit" color="green">
-        <NavLink to={`/admin/user/edit/${user.taiKhoan}`}>
-        <Button style={{ border: 'none' }}
-            className="text-success font-size-xl"
-          >
-            <EditOutlined />
-          </Button>
-        </NavLink>
+          <NavLink to={`/admin/user/edit/${user.taiKhoan}`}>
+            <Button style={{ border: 'none' }}
+              className="text-success font-size-xl"
+            >
+              <EditOutlined />
+            </Button>
+          </NavLink>
         </Tooltip>
         <Tooltip title="Delete" color="red">
           <Button style={{ border: 'none' }}
-            className="text-danger font-size-xl" onClick={()=>{
+            className="text-danger font-size-xl" onClick={() => {
               // dispatch(xoaNguoiDung(user.taiKhoan))
             }}
           >
@@ -57,6 +58,9 @@ const columns = [
 export default function UserAdmin() {
   let { listUsers } = useSelector(state => state.movieReducer)
   const data = listUsers;
+  const handleClickSearch = (e) => {
+    dispatch(layDanhSachNguoiDung(e));
+  };
   let dispatch = useDispatch()
   useEffect(() => {
     const action = layDanhSachNguoiDung()
@@ -74,14 +78,13 @@ export default function UserAdmin() {
           </button>
         </NavLink>
         <div className="d-flex input-group-sm">
-          <input
-            className="form-control p-0 pl-3 py-1 rounded-start text-sm"
-            style={{ border: "1px solid #999" }}
-            placeholder="Nhập từ khóa tìm kiếm"
+          <Search
+            placeholder="Nhập từ khoá tìm kiếm"
+            allowClear
+            enterButton="Search"
+            size="middle"
+            onSearch={handleClickSearch}
           />
-          <button className="btn btn-primary px-3 border-0 rounded-end btn-sm ml-2 " style={{ backgroundColor: '#ff7733' }}>
-            <SearchOutlined />
-          </button>
         </div>
       </div>
 

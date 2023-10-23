@@ -128,22 +128,29 @@ export const timKiemNguoiDung = (id) => {
     }
 }
 
-export const layDanhSachPhim = () => {
+export const layDanhSachPhim = (tenPhim = "") => {
     return async (dispatch) => {
         try {
+            const url = tenPhim.trim() !== ""
+                ? `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP01&tenPhim=${tenPhim}`
+                : `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP01`;
+
             const result = await axios({
                 method: 'GET',
-                url: `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP01`,
+                url,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER
                 }
             });
-            const action = getMovies(result.data.content)
-            dispatch(action)
+
+            const action = getMovies(result.data.content);
+            dispatch(action);
         } catch (error) {
+            console.log(error);
         }
     }
 }
+
 
 export const layThongTinPhim = (id) => {
     return async (dispatch) => {
@@ -327,12 +334,15 @@ export const capNhatThongTinNguoiDung = (data) => {
     }
 };
 
-export const layDanhSachNguoiDung = () => {
+export const layDanhSachNguoiDung = (taiKhoan='') => {
     return async (dispatch) => {
         try {
+            let url = taiKhoan !== ""
+            ? `${URL_API}/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP00&tuKhoa=${taiKhoan}`
+            : `${URL_API}/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP00`;
             const result = await axios({
                 method: 'GET',
-                url: `${URL_API}QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP00`,
+                url,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER
                 }
