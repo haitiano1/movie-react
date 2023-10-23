@@ -43,9 +43,11 @@ export default function MenuCheckout(props) {
   ];
   return (
     <div className='py-5 container'>
-      <NavLink to="/">
-        <a className='float-right text-danger d-flex align-items-center cursor-pointer font-weight-nomal '><RollbackOutlined className='mr-1' /> Quay về trang chủ</a>
-      </NavLink>
+      <div className="d-md-flex flex-row-reverse"> {/* Đảm bảo thẻ nằm cuối trang trên màn hình nhỏ */}
+        <NavLink to="/">
+          <a className='text-danger d-flex align-items-center cursor-pointer font-weight-normal '><RollbackOutlined className='mr-1' /> Quay về trang chủ</a>
+        </NavLink>
+      </div>
       <Tabs activeKey={activeTab} defaultActiveKey="1" items={items} onChange={onChange} />
     </div>
   )

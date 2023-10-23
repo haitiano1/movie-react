@@ -75,7 +75,7 @@ export default function AddUser() {
                         </Form.Item>
                         <hr className='mb-4' />
                         <div className='text-center'>
-                            <button type='submit' className='btn btn-danger font-weight-bold'
+                            <button type='submit' className='btn btn-danger btn-sm font-weight-bold'
                             >Thêm người dùng</button>
                         </div>
                     </Form>

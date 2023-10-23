@@ -534,3 +534,32 @@ export const capNhatThongTinNguoiDungAdmin = (data) => {
         }
     }
 };
+
+export const taoLichChieu = (lichChieu) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'POST',
+                url: `${URL_API}QuanLyDatVe/TaoLichChieu`,
+                data: lichChieu,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER,
+                    'Authorization': "Bearer " + getAccessToken
+                }
+            });
+            dispatch(loadingReducer(false));
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Tạo lịch chiếu thành công!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+        } catch (error) {
+            console.log(error);
+            dispatch(loadingReducer(false));
+        }
+    }
+};

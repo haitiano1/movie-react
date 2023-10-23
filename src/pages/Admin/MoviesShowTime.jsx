@@ -1,8 +1,10 @@
 import React from 'react'
 import {
     Button,
+    DatePicker,
     Form,
     Input,
+    InputNumber,
     Select
 } from 'antd';
 import { Content } from 'antd/es/layout/layout';
@@ -12,7 +14,7 @@ export default function MoviesShowTime() {
         <>
             <Content className='container' >
                 <div
-                className="row"
+                    className="row"
                     style={{
                         padding: 24,
                         minHeight: 360,
@@ -23,7 +25,7 @@ export default function MoviesShowTime() {
                             src={film.hinhAnh}
                             style={{ width: '100%', objectFit: 'cover' }}
                         />
-                        <h5 className='text-center mt-2' style={{color:'#df9338'}}>{film.tenPhim}</h5>
+                        <h5 className='text-center mt-2' style={{ color: '#fb781cf7' }}>{film.tenPhim}</h5>
                     </div>
                     <div className="col-md-8 col-lg-8 col-xl-8">
 
@@ -44,22 +46,28 @@ export default function MoviesShowTime() {
                             }}
                         >
                             <Form.Item label="Hệ thống rạp">
-                                <Input name='taiKhoan' />
+                                <Select
+                                    showSearch
+                                    placeholder="Chọn hệ thống rạp"
+                                />
                             </Form.Item>
                             <Form.Item label="Cụm rạp">
-                                <Input name='matKhau' />
+                                <Select
+                                    showSearch
+                                    placeholder="Chọn cụm rạp"
+                                />
                             </Form.Item>
                             <Form.Item label="Ngày chiếu">
-                                <Input name='matKhau' />
+                                <DatePicker />
                             </Form.Item>
                             <Form.Item label="Giá vé">
-                                <Input name='matKhau' />
+                                <InputNumber min={75000} max={150000} />
                             </Form.Item>
 
                             <hr className='mb-4' />
                             <div className='text-center'>
-                                <button type='submit' className='btn btn-danger font-weight-bold'
-                                >Thêm người dùng</button>
+                                <button type='submit' className='btn btn-danger btn-sm font-weight-bold'
+                                >Tạo lịch chiếu</button>
                             </div>
                         </Form>
                     </div>

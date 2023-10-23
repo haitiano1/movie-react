@@ -132,7 +132,7 @@ export default function AddMovie() {
                         {/* ===================== */}
                         <hr className='mb-4' />
                         <div className='text-center'>
-                            <button type='submit' className='btn btn-danger font-weight-bold'
+                            <button type='submit' className='btn btn-danger btn-sm font-weight-bold'
                             >Thêm phim</button>
                         </div>
 

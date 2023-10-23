@@ -94,7 +94,7 @@ export default function EditUser(props) {
 
                         <hr className='mb-4' />
                         <div className='text-center'>
-                            <button type='submit' className='btn btn-danger font-weight-bold'
+                            <button type='submit' className='btn btn-danger btn-sm font-weight-bold'
                             >Cập nhật</button>
                         </div>
                     </Form>
