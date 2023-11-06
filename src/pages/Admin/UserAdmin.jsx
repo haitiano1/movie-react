@@ -1,72 +1,113 @@
-import { Table, Tooltip, Button, Input } from 'antd';
-import React, { useEffect } from 'react'
-import { EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { layDanhSachNguoiDung, xoaPhim } from '../../redux/action/movieAction';
+import { Table, Tooltip, Button, Input, Modal } from 'antd';
+import { EditOutlined, DeleteOutlined, SearchOutlined } from '@ant-design/icons';
+import { layDanhSachNguoiDung, xoaNguoiDung } from '../../redux/action/movieAction';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import Swal from 'sweetalert2';
+
 const { Search } = Input;
 
+const UserAdmin = () => {
+  const { listUsers } = useSelector(state => state.movieReducer);
+  const dispatch = useDispatch();
+  const [userToDelete, setUserToDelete] = useState(null);
 
-const columns = [
-  {
-    title: 'Tài khoản',
-    dataIndex: 'taiKhoan',
-  },
-  {
-    title: 'Họ tên',
-    dataIndex: "hoTen"
-  },
-  {
-    title: "Email",
-    dataIndex: "email",
-  },
-  {
-    title: "Số điện thoại",
-    dataIndex: "soDT",
-  },
-  {
-    title: "Loại người dùng",
-    dataIndex: "maLoaiNguoiDung"
-  },
-  {
-    title: 'Hành động',
-    render: (_, user) => ( // Sử dụng record thay vì dataIndex
-      <>
-        <Tooltip title="Edit" color="green">
-          <NavLink to={`/admin/user/edit/${user.taiKhoan}`}>
-            <Button style={{ border: 'none' }}
-              className="text-success font-size-xl"
-            >
-              <EditOutlined />
-            </Button>
-          </NavLink>
-        </Tooltip>
-        <Tooltip title="Delete" color="red">
-          <Button style={{ border: 'none' }}
-            className="text-danger font-size-xl" onClick={() => {
-              // dispatch(xoaNguoiDung(user.taiKhoan))
-            }}
-          >
-            <DeleteOutlined />
-          </Button>
-        </Tooltip>
-      </>
-    ),
-  },
-
-]
-export default function UserAdmin() {
-  let { listUsers } = useSelector(state => state.movieReducer)
-  const data = listUsers;
   const handleClickSearch = (e) => {
     dispatch(layDanhSachNguoiDung(e));
   };
-  let dispatch = useDispatch()
-  useEffect(() => {
-    const action = layDanhSachNguoiDung()
-    dispatch(action)
-  }, [])
 
+  const handleDelete = (taiKhoan) => {
+    setUserToDelete(taiKhoan);
+    // Hiển thị modal xác nhận xóa
+    Swal.fire({
+      title: 'Xác nhận xóa',
+      text: 'Bạn có chắc chắn muốn xóa người dùng này?',
+      showDenyButton: true,
+      confirmButtonText: 'Xóa',
+      denyButtonText: `Hủy`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(xoaNguoiDung(taiKhoan))
+          .then((result) => {
+            if (result.success) {
+              // Xóa thành công, hiển thị thông báo thành công
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Xóa Thành Công !',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            } else {
+              // Xóa thất bại, hiển thị thông báo lỗi
+              Swal.fire('Lỗi', result.error.response.data.content, 'error');
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          })
+          .finally(() => {
+            setUserToDelete(null);
+          });
+      } else if (result.isDenied) {
+        setUserToDelete(null);
+        Swal.fire('Hủy xóa', '', 'info');
+      }
+    });
+  };
+  
+
+  useEffect(() => {
+    const action = layDanhSachNguoiDung();
+    dispatch(action);
+  }, []);
+
+  const columns = [
+    {
+      title: 'Tài khoản',
+      dataIndex: 'taiKhoan',
+    },
+    {
+      title: 'Họ tên',
+      dataIndex: "hoTen"
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      title: "Số điện thoại",
+      dataIndex: "soDT",
+    },
+    {
+      title: "Loại người dùng",
+      dataIndex: "maLoaiNguoiDung"
+    },
+    {
+      title: 'Hành động',
+      render: (_, user) => (
+        <>
+          <Tooltip title="Edit" color="green">
+            <NavLink to={`/admin/user/edit/${user.taiKhoan}`}>
+              <Button style={{ border: 'none' }} className="text-success font-size-xl">
+                <EditOutlined />
+              </Button>
+            </NavLink>
+          </Tooltip>
+          <Tooltip title="Delete" color="red">
+            <Button
+              style={{ border: 'none' }}
+              className="text-danger font-size-xl"
+              onClick={() => handleDelete(user.taiKhoan)}
+            >
+              <DeleteOutlined />
+            </Button>
+          </Tooltip>
+        </>
+      ),
+    },
+  ];
 
   return (
     <div className='text-center'>
@@ -88,7 +129,9 @@ export default function UserAdmin() {
         </div>
       </div>
 
-      <Table dataSource={data} columns={columns} rowKey="taiKhoan" />
+      <Table dataSource={listUsers} columns={columns} rowKey="taiKhoan" />
     </div>
-  )
-}
+  );
+};
+
+export default UserAdmin;

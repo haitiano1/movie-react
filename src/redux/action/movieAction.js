@@ -132,8 +132,8 @@ export const layDanhSachPhim = (tenPhim = "") => {
     return async (dispatch) => {
         try {
             const url = tenPhim.trim() !== ""
-                ? `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP01&tenPhim=${tenPhim}`
-                : `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP01`;
+                ? `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP07&tenPhim=${tenPhim}`
+                : `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP07`;
 
             const result = await axios({
                 method: 'GET',
@@ -494,7 +494,7 @@ export const xoaNguoiDung = (id) => {
     return async (dispatch) => {
         dispatch(loadingReducer(true));
         try {
-            const result = await axios({
+            await axios({
                 method: 'DELETE',
                 url: `${URL_API}QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${id}`,
                 headers: {
@@ -502,14 +502,17 @@ export const xoaNguoiDung = (id) => {
                     'Authorization': "Bearer " + getAccessToken
                 }
             });
-            dispatch(loadingReducer(false));
-            // dispatch(layDanhSachPhim())
+            dispatch(loadingReducer(false))
+            dispatch(layDanhSachNguoiDung())
+            return { success: true }; // Trả về thông tin thành công
         } catch (error) {
             console.log(error);
             dispatch(loadingReducer(false));
+            return { success: false, error: error }; // Trả về thông tin thất bại và lỗi (nếu có)
         }
     }
 };
+
 
 export const capNhatThongTinNguoiDungAdmin = (data) => {
     return async (dispatch) => {
