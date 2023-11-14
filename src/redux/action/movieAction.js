@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ACCESS_TOKEN, TOKEN_CYBER, URL_API, userMovie } from "../../ulti/setting";
-import { infoProfileUser, getUser, getMovies, getMovieInfo,searchUser, paginationMovies, login, getCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
+import { infoProfileUser, getUser, getMovies, getMovieInfo,searchUser, paginationMovies, login, getCinemas,getSysCinemas, getShowTimes, getDetailMovies, getListTicket, bookTickets, loadingReducer } from "../reducers/movieReducer";
 import Swal from 'sweetalert2'
 import { history } from "../../App";
 
@@ -206,6 +206,26 @@ export const layThongTinHeThongRap = () => {
             });
             dispatch(loadingReducer(false));
             const action = getCinemas(result.data.content)
+            dispatch(action)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+export const layThongTinCumRapTheoHeThong = (maRap) => {
+    return async (dispatch) => {
+        dispatch(loadingReducer(true));
+        try {
+            const result = await axios({
+                method: 'GET',
+                url: `${URL_API}QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${maRap}`,
+                headers: {
+                    'TokenCybersoft': TOKEN_CYBER
+                }
+            });
+            dispatch(loadingReducer(false));
+            const action = getSysCinemas(result.data.content)
             dispatch(action)
         } catch (error) {
             console.log(error)
@@ -559,6 +579,7 @@ export const taoLichChieu = (lichChieu) => {
                 showConfirmButton: false,
                 timer: 1500
             })
+            history.push('/admin/movie')
 
         } catch (error) {
             console.log(error);

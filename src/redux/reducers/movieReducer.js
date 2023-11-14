@@ -10,18 +10,19 @@ if (localStorage.getItem(userMovie)) {
 
 const initialState = {
   listMovies: [],
-  movieInfo:{},
+  movieInfo: {},
   listMoviesPagination: [],
   listCinema: [],
+  listSysCinema: [],
   listShowTimes: [],
   isLoading: false,
   detailMovies: {},
   userLogin: userName,
   listTicket: {},
   postTickets: {},
-  userInfo:{},
-  listUsers:[],
-  listSearchUsers:{}
+  userInfo: {},
+  listUsers: [],
+  listSearchUsers: {}
 }
 
 const movieReducer = createSlice({
@@ -42,6 +43,9 @@ const movieReducer = createSlice({
     },
     getCinemas(state, action) {
       state.listCinema = action.payload
+    },
+    getSysCinemas(state, action) {
+      state.listSysCinema = action.payload
     },
     getShowTimes(state, action) {
       state.listShowTimes = action.payload
@@ -73,7 +77,7 @@ const movieReducer = createSlice({
   }
 });
 
-export const { infoProfileUser,getUser,searchUser, getMovies,getMovieInfo, logout, paginationMovies, getCinemas, getShowTimes, getDetailMovies, login, getListTicket, loadingReducer, bookTickets, setActiveTab } = movieReducer.actions
+export const { infoProfileUser, getUser, searchUser, getMovies, getMovieInfo, logout, paginationMovies, getCinemas, getSysCinemas, getShowTimes, getDetailMovies, login, getListTicket, loadingReducer, bookTickets, setActiveTab } = movieReducer.actions
 
 export default movieReducer.reducer
 

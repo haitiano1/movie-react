@@ -16,6 +16,7 @@ code {
   background: #ff5e00;
   opacity: 1;
 }
+
 .custom-file-upload:hover {
   border: 1px solid #ff7733;
   color: #ff7733;
@@ -29,7 +30,8 @@ code {
 :where(.css-1km3mtt).ant-input-number:hover {
   border-color: #ff8600;
 }
-.ant-picker-clear{
+
+.ant-picker-clear {
   display: none;
 }
 
@@ -75,6 +77,7 @@ code {
 .ant-tabs-left>div>.ant-tabs-content-holder>.ant-tabs-content>.ant-tabs-tabpane {
   padding-left: 0;
 }
+
 /* Sider */
 :where(.css-1km3mtt).ant-layout .ant-layout-sider {
   background-color: white;
@@ -88,6 +91,7 @@ code {
 :where(.css-1km3mtt).ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-submenu-title:hover {
   background-color: #ff7733;
 }
+
 :where(.css-dev-only-do-not-override-fpg3f5).ant-btn-primary {
   color: #fff;
   background-color: #ff7733
@@ -96,29 +100,34 @@ code {
 :where(.css-1km3mtt).ant-layout .ant-layout-sider-trigger {
   background-color: #ffffff;
 }
+
 :where(.css-dev-only-do-not-override-fpg3f5).ant-form input[type="file"] {
   display: none;
 }
+
 :where(.css-dev-only-do-not-override-fpg3f5).ant-switch.ant-switch-checked {
   background: #ff7733;
 }
+
 :where(.css-dev-only-do-not-override-fpg3f5).ant-switch.ant-switch-checked:hover:not(.ant-switch-disabled) {
   background: #ff7733;
 }
+
 :where(.css-dev-only-do-not-override-fpg3f5).ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
   border-color: #f88f5b;
   background-color: #f88f5b;
 }
 
-.btn-adm{
-    display: inline-block;
-    background-color: green;
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 4px;
+.btn-adm {
+  display: inline-block;
+  background-color: green;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
 }
+
 .custom-file-upload {
   border: 1px solid #ccc;
   display: inline-block;
@@ -127,28 +136,32 @@ code {
   transition: .3s;
   border-radius: 6px;
 }
+
 .custom-file-upload:hover {
   border: 1px solid #ff7733;
   color: #ff7733;
 }
 
-.inline-block{
+.inline-block {
   display: inline-block;
 }
+
 .cursor-pointer {
   cursor: pointer;
 }
-.rounded-full{
+
+.rounded-full {
   border-radius: 100px;
 }
-.mx-auto{
+
+.mx-auto {
   margin-left: auto;
   margin-right: auto;
 }
 
 .normalSeat {
-  width: 29px;
-  height: 25px;
+  width: 35px;
+  height: 30px;
   border-radius: 6px;
   cursor: pointer;
   background-color: rgb(62, 81, 93);
@@ -159,7 +172,7 @@ code {
 }
 
 
-.vipSeat{
+.vipSeat {
   background-color: rgb(247, 181, 0);
 }
 
@@ -196,9 +209,10 @@ code {
 
 @media screen and (max-width:991.98px) {
   .billTicket {
-      margin-top: 50px;
+    margin-top: 50px;
   }
 }
+
 @media screen and (max-width:750px) {
   .normalSeat {
     width: 29px;
@@ -211,7 +225,8 @@ code {
     width: 26px;
     height: 21px;
   }
-  .backHome{
+
+  .backHome {
     display: none;
   }
 }
