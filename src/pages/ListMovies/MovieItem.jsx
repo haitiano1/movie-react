@@ -11,7 +11,7 @@ export default function MovieItem(props) {
         <Col key={item.maPhim} xs={24} sm={12} md={8} lg={6} xl={6}>
             <Card
                 hoverable
-                style={{ width: 240 }}
+                
                 cover={<img onClick={() => {
                         history.push(`/detail/${item.maPhim}`);
                     }} alt="example" src={item.hinhAnh} style={{ objectFit: 'cover', height: 400 }} />}
@@ -21,7 +21,7 @@ export default function MovieItem(props) {
                         history.push(`/detail/${item.maPhim}`);
                     }} title={item.tenPhim} description={item.moTa.length > 45 ? `${item.moTa.slice(0, 45)}...` : item.moTa} />
                     <div className='absolute bottom-3 w-full left-0 px-4'>
-                        <Button className='mt-3 font-weight-bold' type="primary" danger>ĐẶT VÉ</Button>
+                        <Button className='mt-3 font-weight-bold text-white' style={{background:'#ea580c'}} >ĐẶT VÉ</Button>
                     </div>
                 </div>
                 <button className="btnOpenModalVideo" onClick={() => setOpen(true)}>
