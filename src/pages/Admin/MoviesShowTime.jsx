@@ -28,7 +28,6 @@ export default function MoviesShowTime(props) {
     useEffect(() => {
         dispatch(layThongTinHeThongRap());
     }, []);
-    console.log(props.id)
 
     const handleHeThongRap = (value) => {
         if (value !== '') {
@@ -104,10 +103,10 @@ export default function MoviesShowTime(props) {
                                 </Select>
                             </Form.Item>
                             <Form.Item label="Ngày chiếu">
-                                <DatePicker disabledDate={disabledDate} format='DD/MM/YYYY HH:mm:ss' onChange={onChangeDate} onOk={onOk} on showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }} />
+                                <DatePicker disabledDate={disabledDate} placeholder='Chọn ngày giờ chiếu' format='DD/MM/YYYY HH:mm:ss' onChange={onChangeDate} onOk={onOk} on showTime={{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }} />
                             </Form.Item>
                             <Form.Item label="Giá vé" >
-                                <InputNumber onChange={onChangeInputNumber} min={75000} max={150000} />
+                                <InputNumber onChange={onChangeInputNumber} min={75000} max={150000} style={{ width: 250 }} placeholder='Giá vé trong khoảng 75k - 150k'/>
                             </Form.Item>
                             <hr className='mb-4' />
                             <div className='text-center'>

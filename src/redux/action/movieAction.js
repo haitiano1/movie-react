@@ -132,8 +132,8 @@ export const layDanhSachPhim = (tenPhim = "") => {
     return async (dispatch) => {
         try {
             const url = tenPhim.trim() !== ""
-                ? `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP07&tenPhim=${tenPhim}`
-                : `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP07`;
+                ? `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP09&tenPhim=${tenPhim}`
+                : `${URL_API}QuanLyPhim/LayDanhSachPhim?maNhom=GP09`;
 
             const result = await axios({
                 method: 'GET',
@@ -177,7 +177,7 @@ export const layDanhSachPhimPhanTrang = (soTrang = 2, soPhanTuTrenTrang = 8) => 
         try {
             const result = await axios({
                 method: 'GET',
-                url: `${URL_API}QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP07&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
+                url: `${URL_API}QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP09&soTrang=${soTrang}&soPhanTuTrenTrang=${soPhanTuTrenTrang}`,
                 headers: {
                     'TokenCybersoft': TOKEN_CYBER
                 }
@@ -407,6 +407,11 @@ export const themPhimUploadHinh = (formData) => {
             }
         } catch (error) {
             console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "Lỗi rồi!",
+                text: error.response.data.content,
+              });
         }
     }
 };
@@ -582,7 +587,11 @@ export const taoLichChieu = (lichChieu) => {
             history.push('/admin/movie')
 
         } catch (error) {
-            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "Lỗi rồi! Vui lòng điền lại",
+                text: error.response.data.content,
+              });
             dispatch(loadingReducer(false));
         }
     }

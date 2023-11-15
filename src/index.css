@@ -118,6 +118,29 @@ code {
   background-color: #f88f5b;
 }
 
+.btnOpenModalVideo {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: 45px;
+  height: 45px;
+  border: 0px;
+  font-size: 15px;
+  border-radius: 50%;
+  color: orangered;
+  text-align: center;
+  transform: translateX(-50%);
+  background-color: white;
+  animation: ripple 1s linear infinite;
+  transition: .5s;
+  opacity: 0.8;
+}
+.btnOpenModalVideo:hover {
+  background-color: orangered;
+  color: white;
+  opacity: 1;
+}
+
 .btn-adm {
   display: inline-block;
   background-color: green;
@@ -205,6 +228,17 @@ code {
   color: white;
 
   cursor: no-drop;
+}
+
+/* ripple: gợn sóng */
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(184, 83, 11, 0.25), 0 0 0 10px rgba(162, 86, 15, 0.4), 0 0 0 20px rgba(162, 84, 15, 0.4);
+  }
+
+  100% {
+    box-shadow: 0 0 0 10px rgba(162, 81, 15, 0.3), 0 0 0 20px rgba(162, 71, 15, 0.4), 0 0 0 40px rgba(245, 128, 50, 0);
+  }
 }
 
 @media screen and (max-width:991.98px) {
