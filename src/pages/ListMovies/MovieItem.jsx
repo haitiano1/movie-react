@@ -21,7 +21,9 @@ export default function MovieItem(props) {
                         history.push(`/detail/${item.maPhim}`);
                     }} title={item.tenPhim} description={item.moTa.length > 45 ? `${item.moTa.slice(0, 45)}...` : item.moTa} />
                     <div className='absolute bottom-3 w-full left-0 px-4'>
-                        <Button className='mt-3 font-weight-bold text-white' style={{background:'#ea580c'}} >ĐẶT VÉ</Button>
+                        <Button onClick={() => {
+                        history.push(`/detail/${item.maPhim}`);
+                    }} className='mt-3 font-weight-bold text-white' style={{background:'#ea580c'}} type="primary" >ĐẶT VÉ</Button>
                     </div>
                 </div>
                 <button className="btnOpenModalVideo" onClick={() => setOpen(true)}>
