@@ -28,7 +28,7 @@ export default function Carousels() {
 
   let renderBanner = () => {
     return arrBanner.map((item) => {
-      return <img key={item.maBanner} src={item.hinhAnh} height={900} alt="" />
+      return <img key={item.maBanner} src={item.hinhAnh}  alt="" />
     })
   }
 

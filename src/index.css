@@ -291,4 +291,7 @@ code {
     width: 19px;
     height: 16px;
   }
+  .slick-track{
+    height: 250px;
+  }
 }
