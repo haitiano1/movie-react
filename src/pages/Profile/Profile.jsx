@@ -36,7 +36,7 @@ export default function Profile() {
   ];
   return (
     <div className='py-5 row container mx-auto'>
-      <div className="col-3 text-center">
+      <div className="col-12 col-lg-3 text-center">
         <img
           className="rounded-full border border-danger"
           width={180}
@@ -48,7 +48,7 @@ export default function Profile() {
         </h4>
         {userInfo?.maLoaiNguoiDung === "QuanTri" ? <NavLink to="/admin/user" ><div className='btn-adm'>Trang Quản Trị</div></NavLink> : ''}
       </div>
-      <div className="col-9">
+      <div className="col-12 col-lg-9 mt-3">
         <Tabs defaultActiveKey="1" items={items} />
       </div>
     </div>
