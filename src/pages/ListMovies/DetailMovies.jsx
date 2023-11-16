@@ -55,7 +55,7 @@ export default function DetailMovies(props) {
                                                     return <span key={lichChieu.maLichChieu}> 
                                                         <Button  onClick={() => {
                                                             history.push(`/checkout/${lichChieu.maLichChieu}`)
-                                                        }} className='font-weight-bold mr-2' type="primary" danger size='small'>
+                                                        }} className='font-weight-bold mr-2 mb-2' type="primary" danger size='small'>
                                                             {lichChieu.tenRap} - {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
                                                         </Button>
                                                     </span>
@@ -155,6 +155,7 @@ export default function DetailMovies(props) {
                                 <br />
                             </div>
                         </div>
+                        <div className={`${isLargeScreen ? 'd-block' : 'd-none'}`}>
                         <div className="d-flex text-center flex-column mt-4 ml-3 align-items-center">
                             <div className={`c100 p${detailMovies.danhGia * 10} small md:big orange`}>
                                 <span>{detailMovies.danhGia / 2}</span>
@@ -168,6 +169,8 @@ export default function DetailMovies(props) {
                             </div>
                             <p> <b className='text-white text-warning'>{detailMovies.danhGia * 6} người đánh giá</b></p>
                         </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

@@ -55,7 +55,7 @@ export default function LogoCinema() {
                             tabPosition={tabPosition}
                             items={item.lstCumRap.map((cumRapItem) => {
                                 return {
-                                    label: <h6 className='text-left'>{cumRapItem.tenCumRap}</h6>,
+                                    label: <h6 className='text-left ml-2'>{cumRapItem.tenCumRap}</h6>,
                                     key: cumRapItem.maCumRap === 'glx-nguyen-du\r\n' ? 'glx-nguyen-du' : cumRapItem.maCumRap,
                                     children: <div>
                                         {cumRapItem.danhSachPhim.slice(0, 3).map((item, index) => {
