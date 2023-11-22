@@ -1,4 +1,4 @@
-r# Movie App - TIX ĐẶT VÉ XEM PHIM NHANH NHẤT
+<h2>Movie App - HaiNetflix Đặt vé nhanh</h2>
 This is a web application for a movie theater that allows users to buy tickets, reserve seats and manage their bookings. The website also includes an admin panel that allows administrators to manage movies, showtimes, seats and bookings.
 ###
 | ![Home page](https://github.com/haitiano1/movie-react/blob/master/web-img/Home.png) | 
