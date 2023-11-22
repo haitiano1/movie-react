@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+r# Movie App - TIX ĐẶT VÉ XEM PHIM NHANH NHẤT
+This is a web application for a movie theater that allows users to buy tickets, reserve seats and manage their bookings. The website also includes an admin panel that allows administrators to manage movies, showtimes, seats and bookings.
+###
+| ![Home page](https://github.com/haitiano1/movie-react/blob/master/web-img/Home.png) | 
+|:--:| 
+| *Home Page* |
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+| ![Home page](https://github.com/haitiano1/movie-react/blob/master/web-img/admin-page.png) | 
+|:--:| 
+| *Admin Page* |
 
-## Available Scripts
 
-In the project directory, you can run:
+## Features
+### USER PAGE : 
+* User authentication (login and signup)
+* User profile management (change password and update personal information)
+* Movie listing (list of movies with their details such as title, description, image and ratings)
+* Showtimes listing (list of showtimes for each movie)
+* Seat reservation (user can select seats and buy tickets)
+* Booking management (list of all user's bookings and details)
 
-### `npm start`
+**Fast testing** : https://movie-haiht.vercel.app/ <br/>Account User   :   haiuser<br/>Password User  :   123456
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Movie list              | Time start
+:-------------------------------------------:|:-------------------------------------------:
+![Login](https://github.com/haitiano1/movie-react/blob/master/web-img/movie-list.png)  |  ![Signup](https://github.com/haitiano1/movie-react/blob/master/web-img/booking.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+| ![Home page](https://github.com/haitiano1/movie-react/blob/master/web-img/seat.png) | 
+|:--:| 
+| *Booking seat* |
 
-### `npm test`
+Booking seat responsive              | Detail Film responsive
+:-------------------------------------------:|:-------------------------------------------:
+![Login](https://github.com/haitiano1/movie-react/blob/master/web-img/seat-responsive.png)  |  ![Signup](https://github.com/haitiano1/movie-react/blob/master/web-img/detail-responsive.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Info user           | Booking history
+:-------------------------------------------:|:-------------------------------------------:
+![Login](https://github.com/haitiano1/movie-react/blob/master/web-img/profile.png)  |  ![Signup](https://github.com/haitiano1/movie-react/blob/master/web-img/history-booking.png)
 
-### `npm run build`
+### ADMIN PAGE : 
+* Admin authentication (login)
+* Movie management (add, update and delete movies)
+* Showtime management (set showtimes for each movie)
+* Seat management (set seats for each showtime)
+* Booking management (list of all bookings and details)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Fast testing** : https://movie-haiht.vercel.app/admin
+<br/> Account Admin  :   haitiano1 <br/> Password Admin  :   123456
+</br>
+<br/> Account Admin  :   nhuongemnha777 <br/> Password Admin  :   123456
+</br>
+<br/> Account Admin  :   nonam234 <br/> Password Admin  :   123456
+</br>
+<br/> Account Admin  :   number3 <br/> Password Admin  :   number3
+> Note!!!: when you change the password, Admin account will become User account (so you cannot access admin page anymore)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create new film           | Edit film
+:-------------------------------------------:|:-------------------------------------------:
+![Login](https://github.com/haitiano1/movie-react/blob/master/web-img/AddFilm.png)  |  ![Signup](https://github.com/haitiano1/movie-react/blob/master/web-img/EditFilm.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+User management           | Edit user
+:-------------------------------------------:|:-------------------------------------------:
+![Login](https://github.com/haitiano1/movie-react/blob/master/web-img/UserAdmin.png)  |  ![Signup](https://github.com/haitiano1/movie-react/blob/master/web-img/EditUser.png)
 
-### `npm run eject`
+Want more ? Access my website now 
+https://movie-haiht.vercel.app/
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Technologies
+The web application was built using the following technologies:
+* HTML, CSS and JavaScript for the front-end
+* React.js for building the UI
+* JWT for authentication
+* Vercel for deployment and hosting
+* Ant Design for styling and UI components
+* Swagger for the back-end API documentation
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### Implementer
+* Hoang Thanh Hai - https://github.com/haitiano1
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
