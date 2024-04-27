@@ -44,7 +44,7 @@ Info user           | Booking history
 * Seat management (set seats for each showtime)
 * Booking management (list of all bookings and details)
 
-**Fast testing** : https://movie-haiht.vercel.app/admin
+**Fast testing** : https://movie-haiht.vercel.app/admin/user
 <br/> Account Admin  :   haitiano1 <br/> Password Admin  :   123456
 </br>
 <br/> Account Admin  :   nhuongemnha777 <br/> Password Admin  :   123456
